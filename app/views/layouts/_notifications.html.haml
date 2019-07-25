@@ -1,0 +1,6 @@
+- if flash[:notice]
+  .notification.is-primary
+    %p.notice= notice
+- if flash[:alert]
+  .notification.is-danger
+    %p.alert= alert
