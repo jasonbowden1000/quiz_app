@@ -1,0 +1,25 @@
+%nav{class: 'navbar', role: 'navigation', 'aria-label': 'main navigation'}
+  .navbar-brand
+    = link_to('https://bulma.io', class: 'navbar-item') do
+      %img{src: 'https://bulma.io/images/bulma-logo.png', width: '112', height: '28'}
+    %a{role: 'button', class: 'navbar-burger burger', 'aria-label': 'menu', 'aria-expanded': 'false', 'data-target': 'quizAppNavbar'}
+      %span{'aria-hidden': 'true'}
+      %span{'aria-hidden': 'true'}
+      %span{'aria-hidden': 'true'}
+  #quizAppNavbar.navbar-menu
+    .navbar-start
+      %a.navbar-item Home
+      %a.navbar-item Documentation
+      .navbar-item.has-dropdown.is-hoverable
+        %a.navbar-link More
+        .navbar-dropdown
+          %a.navbar-item About
+          %a.navbar-item Contact
+          %a.navbar-item I shop class make small fuzzball
+    .navbar-end
+      .navbar-item
+        .buttons
+          %a.button.is-primary
+            %strong Sign up
+          %a.button.is-light Log in
+                
