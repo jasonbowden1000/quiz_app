@@ -6,8 +6,16 @@
         = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
           = f.error_notification
           .field
+            .control
+              = f.input :first_name, required: true, autofocus: true, input_html: { class: 'input' }, |
+                wrapper: false, label_html: { class: 'label' }
+          .field
+            .control
+              = f.input :last_name, required: true, input_html: { class: 'input' }, |
+                wrapper: false, label_html: { class: 'label' }
+          .field
             .control 
-              = f.input :email, required: true, autofocus: true, input_html: { class: 'input', autocomplete: 'email' }, |
+              = f.input :email, required: true, input_html: { class: 'input', autocomplete: 'email' }, |
                 wrapper: false, label_html: { class: 'label' }
           .field
             .control

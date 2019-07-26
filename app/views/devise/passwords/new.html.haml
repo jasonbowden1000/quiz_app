@@ -1,11 +1,13 @@
-%h2 Forgot your password?
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email,                       |
-      required: true,                       |
-      autofocus: true,                      |
-      input_html: { autocomplete: "email" } 
-  .form-actions
-    = f.button :submit, "Send me reset password instructions"
-= render "devise/shared/links"
+%section.section
+  .container 
+    .columns.is-centered
+      .column.is-4
+        %h2.title.is-2 Forgot your password?
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          = f.error_notification
+          .field 
+            .control
+              = f.input :email, required: true, autofocus: true, input_html: { autocomplete: 'email', class: 'input' }, |
+                label_html: { class: 'label' }, wrapper: false
+          = f.button :submit, 'Send me reset password instructions', class: 'button is-primary'
+        = render 'devise/shared/links'
