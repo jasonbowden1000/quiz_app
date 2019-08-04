@@ -17,10 +17,11 @@ RSpec.describe 'Decks' do
       fill_in "Title", with: deck1.title
       fill_in "Description", with: deck1.description
       click_button "Create Deck"
+      click_link "All Decks"
 
-      expect(page.first("h2")).text.to eql("Your Decks")
-      expect(page).to have_content deck.title
-      expect(page).to have_content deck.description
+      expect(page.first("h2").text).to eql("Your Decks")
+      expect(page).to have_content deck1.title
+      expect(page).to have_content deck1.description
     end
   end 
 end

@@ -25,10 +25,11 @@ class DecksController < ApplicationController
   # POST /decks.json
   def create
     @deck = Deck.new(deck_params)
+    @deck.user_id = current_user.id
 
     respond_to do |format|
       if @deck.save
-        format.html { redirect_to @deck, notice: 'Deck was successfully created.' }
+        format.html { redirect_to @deck }
         format.json { render :show, status: :created, location: @deck }
       else
         format.html { render :new }
@@ -69,6 +70,6 @@ class DecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deck_params
-      params.require(:deck).permit(:title, :description, :user_id)
+      params.require(:deck).permit(:title, :description)
     end
 end
