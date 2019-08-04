@@ -1,19 +1,25 @@
-- if @decks.any?
-  %h2 Your Decks
-  - @decks.each do |deck|
-    %p
-      = deck.title
-    %p
-      = deck.description
-    %p
-      = link_to 'View Deck Details', deck
-    %p
-      = link_to 'Edit', edit_deck_path(deck)
-    %p
-      = link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' }
-  %br
-- else
-  %p You currently have no decks.
-= link_to 'Add Deck', new_deck_path, class: "button is-primary"
+.section
+  .container
+  - if @decks.any?
+    %h2.title.is-2 Your Decks
+    - @decks.each do |deck|
+      .content
+        .card
+          %header.card-header
+            %p.card-header-title
+              = deck.title
+          .card-content
+            .content
+              = deck.description
+          %footer.card-footer
+            = link_to "View", deck, class: "card-footer-item"
+            = link_to "Edit", edit_deck_path(deck), class: "card-footer-item"
+            = link_to "Delete", deck, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
+    = link_to "Add Deck", new_deck_path, class: "button is-primary"
+  - else
+    .content
+      %p You currently have no decks.
+    .content
+      = link_to "Add Deck", new_deck_path, class: "button is-primary"
 
 
