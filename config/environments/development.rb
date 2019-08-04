@@ -68,8 +68,11 @@ Rails.application.configure do
 
   config.generators do |g|
     g.controller_specs false
+    g.helper_specs false
     g.javascript_engine :js
     g.model_specs false
+    g.request_specs false
+    g.routing_specs false
     g.scaffold_stylesheet false
     g.view_specs false
   end
