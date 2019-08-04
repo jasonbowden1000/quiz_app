@@ -39,6 +39,7 @@ gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'simple_form', '~> 4.1'
 gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'bulma-rails', '~> 0.7.5'
+gem 'bulma-extensions-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

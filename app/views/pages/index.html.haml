@@ -1,2 +1,6 @@
-%h1 Pages#index
-%p Find me in app/views/home/index.html.erb
+.section
+  .container
+    - if user_signed_in?
+      %p Welcome Back, #{current_user.first_name} #{current_user.last_name}!
+      .is-divider
+      %h2.title Dashboard

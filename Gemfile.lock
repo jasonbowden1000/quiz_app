@@ -58,6 +58,7 @@ GEM
     bootsnap (1.4.4)
       msgpack (~> 1.0)
     builder (3.2.3)
+    bulma-extensions-rails (1.0.30)
     bulma-rails (0.7.5)
       sassc (~> 2.0)
     byebug (11.0.1)
@@ -296,6 +297,7 @@ DEPENDENCIES
   better_errors (~> 2.5, >= 2.5.1)
   binding_of_caller (~> 0.8.0)
   bootsnap (>= 1.1.0)
+  bulma-extensions-rails
   bulma-rails (~> 0.7.5)
   byebug
   capybara

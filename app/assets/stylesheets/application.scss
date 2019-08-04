@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
-@import "palette";
 @import "bulma";
+@import "bulma-extensions";
 
 .notification:not(:last-child) {
   margin-bottom: 0;

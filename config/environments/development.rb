@@ -70,5 +70,4 @@ Rails.application.configure do
     g.scaffold_stylesheet false
     g.javascript_engine :js
   end
-
 end

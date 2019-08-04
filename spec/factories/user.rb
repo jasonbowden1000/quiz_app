@@ -3,11 +3,7 @@ FactoryBot.define do
     email { "autobots@teletran1.com" }
     first_name { "Optimus" }
     last_name { "Prime" }
-  end
-
-  factory :second_user do
-    email { "autobots@primus.com" }
-    first_name { "Alpha" }
-    last_name { "Trion" }
+    password { "orionpax123" }
+    confirmed_at { Time.now } 
   end
 end
