@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe 'Decks' do
   let(:user1) { FactoryBot.create(:user) }
   # let!(:user2) { FactoryBot.create(:user, first_name: "Tony", last_name: "Stark", email: "ironman123@gmail.com") }
-  let(:deck1) { FactoryBot.create(:deck, title: "Shell Scripting", description: "stay sharp on useful skills", user: user1 )}
+  let(:deck1) { FactoryBot.create(:deck, user: user1 )}
 
   before do
     login_as(user1)
