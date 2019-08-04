@@ -1,5 +1,4 @@
 require "rails_helper"
-include Warden::Test::Helpers
 
 RSpec.describe "A user on the homepage" do
   let!(:user) { FactoryBot.create(:user) }
@@ -21,10 +20,9 @@ RSpec.describe "A user on the homepage" do
 
   describe "when not logged in" do
     before do
-      logout
       visit "/"
     end
-
+    
     it "should not see the dashboard" do
       expect(page).to_not have_content "Dashboard"
     end
