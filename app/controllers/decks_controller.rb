@@ -1,4 +1,5 @@
 class DecksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_deck, only: [:show, :edit, :update, :destroy]
 
   # GET /decks
