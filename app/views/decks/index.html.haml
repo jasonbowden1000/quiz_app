@@ -1,0 +1,20 @@
+- if @decks.any?
+  %h2 Your Decks
+  %table
+    %thead
+      %tr
+        %th
+        %th
+        %th
+    %tbody
+      - @decks.each do |deck|
+        %tr
+          %td= link_to 'Show', deck
+          %td= link_to 'Edit', edit_deck_path(deck)
+          %td= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' }
+  %br
+- else
+  %p You currently have no decks.
+= link_to 'Add Deck', new_deck_path, class: "button is-primary"
+
+

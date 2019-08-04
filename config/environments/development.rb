@@ -67,7 +67,10 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.generators do |g|
-    g.scaffold_stylesheet false
+    g.controller_specs false
     g.javascript_engine :js
+    g.model_specs false
+    g.scaffold_stylesheet false
+    g.view_specs false
   end
 end
