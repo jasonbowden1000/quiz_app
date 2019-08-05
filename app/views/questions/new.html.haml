@@ -1,0 +1,34 @@
+%h2 Add Question
+= simple_form_for([@deck, @question], html: { id: "new_question_form" }) do |f|
+  = f.error_notification
+  .field
+    .control
+      = f.input :text, required: true, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
+  .field
+    .control
+      = f.input :description, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
+  .control   
+    %label.radio
+      %input{type: "radio", name: "question_type", value: "multiple_choice" }
+        Multiple Choice
+      %input{type: "radio", name: "question_type", value: "multiple_answer" }
+        Multiple Answer
+      %input{type: "radio", name: "question_type", value: "true_false" }
+        True/False
+      %input{type: "radio", name: "question_type", value: "written" }
+        Written
+  .field
+    .control
+      %label.label Question 1: Answer
+      %input{class: "input", type: "text", name: "question[answer_1][text]"}
+  .field
+    .control
+      %label.label Question 1: Truth-value
+      %input{type: "radio", name: "question[answer_1][truth_value]", value: "true" }
+        True
+      %input{type: "radio", name: "question[answer_1][truth_value]",  value: "false" }
+        False
+  %a#add_answer.button Add Answer
+
+  = f.button :submit, "Create Question", class: "button is-primary"
+
