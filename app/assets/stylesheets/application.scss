@@ -17,6 +17,7 @@
 @import "bulma-extensions";
 @import "font_awesome5_webfont";
 
+.content p:not(:last-child),
 .notification:not(:last-child) {
   margin-bottom: 0;
 }

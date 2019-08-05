@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_04_124607) do
+ActiveRecord::Schema.define(version: 2019_08_05_040422) do
+
+  create_table "answers", force: :cascade do |t|
+    t.boolean "truth_value", default: true
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "question_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
 
   create_table "decks", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,6 +28,16 @@ ActiveRecord::Schema.define(version: 2019_08_04_124607) do
     t.string "title"
     t.text "description"
     t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "type"
+    t.text "description"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "deck_id"
+    t.index ["deck_id"], name: "index_questions_on_deck_id"
   end
 
   create_table "users", force: :cascade do |t|
