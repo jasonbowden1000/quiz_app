@@ -3,7 +3,7 @@ class Question < ApplicationRecord
   has_many :answers
   
   validates :text, presence: true
-  # validates :description, presence: true
+  validates :description, presence: true
   # validates :question_type, presence: true
 
   accepts_nested_attributes_for :answers

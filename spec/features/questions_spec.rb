@@ -43,12 +43,13 @@ RSpec.describe "Multiple-Choice Questions" do
       click_button "Create Question"
       expect(page).to have_content "Text can't be blank" 
     end
-=begin
+
     it "should check for a missing description field" do
       click_button "Create Question"
       expect(page).to have_content "Description can't be blank"
     end
 
+=begin
     context "when more than two valid answers are given" do
       it "should ignore empty answers"
     end 
