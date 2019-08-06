@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_040422) do
+ActiveRecord::Schema.define(version: 2019_08_06_090331) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean "truth_value", default: true
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_040422) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "type"
+    t.integer "question_type"
     t.text "description"
     t.text "text"
     t.datetime "created_at", null: false

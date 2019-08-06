@@ -9,26 +9,26 @@
       = f.input :description, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
   .control   
     %label.radio
-      %input{type: "radio", name: "question[type]", value: 0, checked: "checked" }
+      %input{type: "radio", name: "question[question_type]", value: 0, checked: "checked" }
         Multiple Choice
-      %input{type: "radio", name: "question[type]", value: 1 }
+      %input{type: "radio", name: "question[question_type]", value: 1 }
         Multiple Answer
-      %input{type: "radio", name: "question[type]", value: 2 }
+      %input{type: "radio", name: "question[question_type]", value: 2 }
         True/False
-      %input{type: "radio", name: "question[type]", value: 3 }
+      %input{type: "radio", name: "question[question_type]", value: 3 }
         Written
   .field
     .control
       %label.label Question 1: Answer
-      %input{class: "input", type: "text", name: "question[answer_1][text]"}
+      %input{class: "input", type: "text", name: "question[answers_attributes][444][text]"}
   .field
     .control
       %label.label Question 1: Truth-value
-      %input{type: "radio", name: "question[answer_1][truth_value]", value: "true" }
+      %input{type: "radio", name: "question[answers_attributes][444][truth_value]", value: "true" }
         True
-      %input{type: "radio", name: "question[answer_1][truth_value]",  value: "false" }
+      %input{type: "radio", name: "question[answers_attributes][444][truth_value]",  value: "false" }
         False
-  %a#add_answer.button Add Answer
 
+  %a#add_answer.button Add Answer
   = f.button :submit, "Create Question", class: "button is-primary"
 

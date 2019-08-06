@@ -4,7 +4,7 @@ document.addEventListener('turbolinks:load', function() {
 
   console.log('questions.js');
   const newQuestionForm = document.getElementById('new_question_form');
-  var count = 1;
+  var count = 0;
 
   if (newQuestionForm) {
     console.log('has NewQuestionForm');
