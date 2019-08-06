@@ -12,6 +12,8 @@ class QuestionsController < ApplicationController
         format.html { redirect_to deck_questions_path, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
+        Rails.logger.info "there were errors, bummer"
+        Rails.logger.info @question.errors
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
@@ -33,6 +35,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:text, :description, :question_type, question: [])
+    params.require(:question).permit(:text, :description, :type, answers: [])
   end
 end

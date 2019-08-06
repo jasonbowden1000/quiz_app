@@ -4,4 +4,7 @@ class Question < ApplicationRecord
   
   validates :text, presence: true
   validates :description, presence: true
+  validates :type, presence: true
+
+  accepts_nested_attributes_for :answer
 end

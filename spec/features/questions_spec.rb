@@ -54,7 +54,21 @@ RSpec.describe "Multiple-Choice Questions" do
     end 
 
     context "should display an error" do
-      it "when more than one answer is given"
+      it "when more than one answer is given" do
+        fill_in "Text", with: "Who is on first?"
+        fill_in "Description", with: "This test will build your critical thinking ability"
+        choose "question_type", option: 0
+
+        fill_in "question[answer_1][text]", with: "Hu"
+        choose "question[answer_1][truth_value]", option: true
+        add_answer = find("a#add_answer")
+        add_answer.click
+        fill_in "question[answer_2][text]", with: "Who"
+        choose "question[answer_2][truth_value]", option: true
+
+        click_button "Create Question"
+        expect(page).to have_content "Multiple-Choice questions should only have one correct answer"
+      end
 
       it "when no answer is submitted"
 

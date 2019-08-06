@@ -9,13 +9,13 @@
       = f.input :description, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
   .control   
     %label.radio
-      %input{type: "radio", name: "question_type", value: "multiple_choice" }
+      %input{type: "radio", name: "question[type]", value: 0, checked: "checked" }
         Multiple Choice
-      %input{type: "radio", name: "question_type", value: "multiple_answer" }
+      %input{type: "radio", name: "question[type]", value: 1 }
         Multiple Answer
-      %input{type: "radio", name: "question_type", value: "true_false" }
+      %input{type: "radio", name: "question[type]", value: 2 }
         True/False
-      %input{type: "radio", name: "question_type", value: "written" }
+      %input{type: "radio", name: "question[type]", value: 3 }
         Written
   .field
     .control
