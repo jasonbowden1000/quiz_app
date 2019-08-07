@@ -24,6 +24,7 @@ document.addEventListener('turbolinks:load', function() {
       let newTextInput = document.createElement('input');
       newTextInput.setAttribute('type', 'text');
       newTextInput.classList.add('input');
+      newTextInput.id = "answer_text_" + count;
       newTextInput.name = 'question[answers_attributes][' + count + '][text]';
 
       let newRadioInputTrueLabel = document.createElement('label');
@@ -32,6 +33,7 @@ document.addEventListener('turbolinks:load', function() {
       newRadioInputTrue.setAttribute('type', 'radio');
       newRadioInputTrue.setAttribute('value', 'true');
       newRadioInputTrue.name = 'question[answers_attributes][' + count + '][truth_value]';
+      newRadioInputTrue.id = "answer_true_" + count;
       newRadioInputTrueText = document.createTextNode(' True');
       newRadioInputTrueLabel.appendChild(newRadioInputTrue);
       newRadioInputTrueLabel.appendChild(newRadioInputTrueText);
@@ -42,6 +44,7 @@ document.addEventListener('turbolinks:load', function() {
       newRadioInputFalse.setAttribute('type', 'radio');
       newRadioInputFalse.setAttribute('value', 'false');
       newRadioInputFalse.name = 'question[answers_attributes][' + count + '][truth_value]';
+      newRadioInputFalse.id = "answer_false_" + count;
       newRadioInputFalseText = document.createTextNode(' False');
       newRadioInputFalseLabel.appendChild(newRadioInputFalse);
       newRadioInputFalseLabel.appendChild(newRadioInputFalseText);

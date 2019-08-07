@@ -27,16 +27,33 @@
             %input{type: "radio", name: "question[question_type]", value: 3 }
             Written
       %br/
-      .field
-        .control
-          %label.label Answer 1:
-          %input{class: "input", type: "text", name: "question[answers_attributes][0][text]"}
-          %label.radio
-            %input{type: "radio", name: "question[answers_attributes][0][truth_value]", value: "true" }
-            True
-          %label.radio
-            %input{type: "radio", name: "question[answers_attributes][0][truth_value]",  value: "false" }
-            False
+      - if @question.answers.present?
+        - @question.answers.each_with_index do |answer, index|
+          .field.answer
+            .control
+              %label.label 
+                = "Answer #{index + 1}:"
+              %input{class: "input", type: "text", name: "question[answers_attributes][#{index}][text]", value: answer.text, |
+                id: "answer_text_#{index}"  }
+              %label.radio
+                %input{type: "radio", name: "question[answers_attributes][#{index}][truth_value]", value: "true", |
+                  id: "answer_true_#{index}", checked: answer.truth_value == true || nil }
+                True
+              %label.radio
+                %input{type: "radio", name: "question[answers_attributes][#{index}][truth_value]",  value: "false", |
+                  id: "answer_false_#{index}", checked: answer.truth_value == false || nil }
+                False
+      - else
+        .field.answer
+          .control
+            %label.label Answer 1:
+            %input{class: "input", type: "text", name: "question[answers_attributes][0][text]", id: "answer_text_0" }
+            %label.radio
+              %input{type: "radio", name: "question[answers_attributes][0][truth_value]", value: "true", id: "answer_true_0" }
+              True
+            %label.radio
+              %input{type: "radio", name: "question[answers_attributes][0][truth_value]",  value: "false", id: "answer_false_0" }
+              False
 
       %a#add_answer.button Add Answer
       = f.button :submit, "Create Question", class: "button is-primary"

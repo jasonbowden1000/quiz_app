@@ -10,9 +10,6 @@ class QuestionsController < ApplicationController
         format.html { redirect_to deck_questions_path, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
-        Rails.logger.info "ERRORS, MAN WTF"
-        Rails.logger.info "Here's the stuff, cook up a new form"
-        Rails.logger.info question_params
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end

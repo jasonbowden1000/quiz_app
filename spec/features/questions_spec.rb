@@ -43,6 +43,28 @@ RSpec.describe "New Multiple-Choice Questions" do
       click_button "Create Question"
       expect(page).to have_content "Text can't be blank" 
     end
+
+    it "should persist submitted data in dynamically generated fields", js: true do
+      fill_in "question[answers_attributes][0][text]", with: "Hu"
+      choose "question[answers_attributes][0][truth_value]", option: true
+      add_answer = find("a#add_answer")
+      add_answer.click
+      fill_in "question[answers_attributes][1][text]", with: "Who"
+      choose "question[answers_attributes][1][truth_value]", option: true
+      add_answer.click
+      fill_in "question[answers_attributes][2][text]", with: "Scooby Doo"
+      choose "question[answers_attributes][2][truth_value]", option: false
+      add_answer.click
+      fill_in "question[answers_attributes][3][text]", with: "The Fonz"
+      choose "question[answers_attributes][3][truth_value]", option: false
+      click_button "Create Question"
+
+      expect(page.all(".answer").count).to eql(4)
+      expect(page).to have_selector("input[value='The Fonz'")
+
+      expect(find("#answer_true_1")).to be_checked
+      expect(find("#answer_false_2")).to be_checked
+    end
   end
 
   context "submitted with missing description fields" do
