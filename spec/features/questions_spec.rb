@@ -1,9 +1,21 @@
 require "rails_helper"
 
 RSpec.describe "New Multiple-Choice Questions" do
+  MULTIPLE_CHOICE = 0
   let(:user1) { FactoryBot.create(:user) }
   let!(:deck1) { FactoryBot.create(:deck, id: 123, title: "My Armors", description: "Don't leave home without them", user: user1 )}
   let!(:deck2) { FactoryBot.create(:deck, id: 456, title: "Rogues Gallery", description: "baddies", user: user1 )}
+
+  def fill_in_answer(index:, text:, truth_value:)
+    fill_in "question[answers_attributes][#{index}][text]", with: text
+    choose "question[answers_attributes][#{index}][truth_value]", option: truth_value
+  end
+
+  def setup_question
+    fill_in "Text", with: "Who is on first?"
+    fill_in "Description", with: "This test will build your critical thinking ability"
+    choose "question[question_type]", option: MULTIPLE_CHOICE
+  end
 
   before do
     login_as(user1)
@@ -17,21 +29,13 @@ RSpec.describe "New Multiple-Choice Questions" do
 
   context "when successfully created" do
     it "can be seen on questions list", js: true do
-      fill_in "Text", with: "Who is on first?"
-      fill_in "Description", with: "This test will build your critical thinking ability"
-      choose "question[question_type]", option: 0 
-      fill_in "question[answers_attributes][0][text]", with: "Hu"
-      choose "question[answers_attributes][0][truth_value]", option: false
+      setup_question
       add_answer = find("a#add_answer")
-      add_answer.click
-      fill_in "question[answers_attributes][1][text]", with: "Who"
-      choose "question[answers_attributes][1][truth_value]", option: true
-      add_answer.click
-      fill_in "question[answers_attributes][2][text]", with: "Scooby Doo"
-      choose "question[answers_attributes][2][truth_value]", option: false
-      add_answer.click
-      fill_in "question[answers_attributes][3][text]", with: "The Fonz"
-      choose "question[answers_attributes][3][truth_value]", option: false
+      3.times { add_answer.click }
+      fill_in_answer(index: 0, text: "Hu", truth_value: false)
+      fill_in_answer(index: 1, text: "Who", truth_value: true)
+      fill_in_answer(index: 2, text: "Scooby Doo", truth_value: false)
+      fill_in_answer(index: 3, text: "The Fonz", truth_value: false)
 
       click_button "Create Question"
 
@@ -41,10 +45,10 @@ RSpec.describe "New Multiple-Choice Questions" do
 
   context "submitted with missing question text fields" do
     it "should display an error message", js: true do
-      fill_in "question[answers_attributes][0][text]", with: "Hu"
-      choose "question[answers_attributes][0][truth_value]", option: false
       add_answer = find("a#add_answer")
       add_answer.click
+      fill_in_answer(index: 0, text: "Hu", truth_value: false)
+      fill_in_answer(index: 0, text: "Hu", truth_value: false)
       choose "question[answers_attributes][1][truth_value]", option: true
       click_button "Create Question"
 
@@ -53,18 +57,12 @@ RSpec.describe "New Multiple-Choice Questions" do
     end
 
     it "should persist submitted data in dynamically generated fields", js: true do
-      fill_in "question[answers_attributes][0][text]", with: "Hu"
-      choose "question[answers_attributes][0][truth_value]", option: true
       add_answer = find("a#add_answer")
-      add_answer.click
-      fill_in "question[answers_attributes][1][text]", with: "Who"
-      choose "question[answers_attributes][1][truth_value]", option: true
-      add_answer.click
-      fill_in "question[answers_attributes][2][text]", with: "Scooby Doo"
-      choose "question[answers_attributes][2][truth_value]", option: false
-      add_answer.click
-      fill_in "question[answers_attributes][3][text]", with: "The Fonz"
-      choose "question[answers_attributes][3][truth_value]", option: false
+      3.times { add_answer.click }
+      fill_in_answer(index: 0, text: "Hu", truth_value: true)
+      fill_in_answer(index: 1, text: "Who", truth_value: true)
+      fill_in_answer(index: 2, text: "Scooby Doo", truth_value: false)
+      fill_in_answer(index: 3, text: "The Fonz", truth_value: false)
 
       click_button "Create Question"
 
@@ -82,19 +80,15 @@ RSpec.describe "New Multiple-Choice Questions" do
     end
   end
 
-  it "should ignore extra answers"
+  # it "should ignore extra answers"
 
   context "submitted with more than one correct answer" do
     it "should display an error message", js: true do
-      fill_in "Text", with: "Who is on first?"
-      fill_in "Description", with: "This test will build your critical thinking ability"
-      choose "question[question_type]", option: 0 
-      fill_in "question[answers_attributes][0][text]", with: "Hu"
-      choose "question[answers_attributes][0][truth_value]", option: true
+      setup_question
       add_answer = find("a#add_answer")
       add_answer.click
-      fill_in "question[answers_attributes][1][text]", with: "Who"
-      choose "question[answers_attributes][1][truth_value]", option: true
+      fill_in_answer(index: 0, text: "Hu", truth_value: true)
+      fill_in_answer(index: 1, text: "Who", truth_value: true)
 
       click_button "Create Question"
 
@@ -104,30 +98,25 @@ RSpec.describe "New Multiple-Choice Questions" do
 
   context "with fewer than two submitted answers" do
     it "should display an error message", js: true do
-      fill_in "Text", with: "Who is on first?"
-      fill_in "Description", with: "This test will build your critical thinking ability"
-      choose "question[question_type]", option: 0 
-      fill_in "question[answers_attributes][0][text]", with: "Hu"
-      choose "question[answers_attributes][0][truth_value]", option: true
+      setup_question
+      fill_in_answer(index: 0, text: "Hu", truth_value: true)
 
       click_button "Create Question"
+
       expect(page).to have_content "Multiple choice questions should have at least two choices"
     end
   end
 
   context "with all false answer submissions" do
     it "should display an error message", js: true do
-      fill_in "question[answers_attributes][0][text]", with: "Hu"
-      choose "question[answers_attributes][0][truth_value]", option: false
       add_answer = find("a#add_answer")
-      add_answer.click
-      fill_in "question[answers_attributes][1][text]", with: "Who"
-      choose "question[answers_attributes][1][truth_value]", option: false
-      add_answer.click
-      fill_in "question[answers_attributes][2][text]", with: "Scooby Doo"
-      choose "question[answers_attributes][2][truth_value]", option: false
+      2.times { add_answer.click }
+      fill_in_answer(index: 0, text: "Hu", truth_value: false)
+      fill_in_answer(index: 1, text: "Who", truth_value: false)
+      fill_in_answer(index: 2, text: "Scooby Doo", truth_value: false)
 
       click_button "Create Question"
+
       expect(page).to have_content "All Multiple choice options cannot be false"
     end
   end
