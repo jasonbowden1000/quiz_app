@@ -1,0 +1,14 @@
+.field.answer
+  .control
+    %label.label 
+      = "Answer #{index + 1}:"
+    %input{class: "input", required: true, type: "text", name: "question[answers_attributes][#{index}][text]", |
+      value: answer_text, id: "answer_text_#{index}"  }
+    %label.radio
+      %input{type: "radio", name: "question[answers_attributes][#{index}][truth_value]", value: "true", |
+        id: "answer_true_#{index}", checked: answer_truth_value == true || nil }
+      True
+    %label.radio
+      %input{type: "radio", name: "question[answers_attributes][#{index}][truth_value]",  value: "false", |
+        id: "answer_false_#{index}", checked: answer_truth_value == false || nil }
+      False

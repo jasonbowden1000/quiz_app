@@ -15,33 +15,41 @@ RSpec.describe "New Multiple-Choice Questions" do
     click_link "Add Question"
   end
 
-=begin
-    it "can be seen on questions list"
+  context "when successfully created" do
+    it "can be seen on questions list", js: true do
       fill_in "Text", with: "Who is on first?"
       fill_in "Description", with: "This test will build your critical thinking ability"
-      choose "question_type", option: "multiple_choice"
-      fill_in "question[answer_1][text]", with: "Hu"
-      choose "question[answer_1][truth_value]", option: false
+      choose "question[question_type]", option: 0 
+      fill_in "question[answers_attributes][0][text]", with: "Hu"
+      choose "question[answers_attributes][0][truth_value]", option: false
       add_answer = find("a#add_answer")
       add_answer.click
-      fill_in "question[answer_2][text]", with: "Who"
-      choose "question[answer_2][truth_value]", option: true
+      fill_in "question[answers_attributes][1][text]", with: "Who"
+      choose "question[answers_attributes][1][truth_value]", option: true
       add_answer.click
-      fill_in "question[answer_3][text]", with: "Scooby Doo"
-      choose "question[answer_3][truth_value]", option: false
+      fill_in "question[answers_attributes][2][text]", with: "Scooby Doo"
+      choose "question[answers_attributes][2][truth_value]", option: false
       add_answer.click
-      fill_in "question[answer_4][text]", with: "The Fonz"
-      choose "question[answer_4][truth_value]", option: false
+      fill_in "question[answers_attributes][3][text]", with: "The Fonz"
+      choose "question[answers_attributes][3][truth_value]", option: false
+
       click_button "Create Question"
 
-      expect(page).to have_content "Your Decks"
+      expect(page).to have_content "Question was successfully created."
     end
-=end
+  end
 
-  context "submitted with missing text fields" do
-    it "should display an error message" do
+  context "submitted with missing question text fields" do
+    it "should display an error message", js: true do
+      fill_in "question[answers_attributes][0][text]", with: "Hu"
+      choose "question[answers_attributes][0][truth_value]", option: false
+      add_answer = find("a#add_answer")
+      add_answer.click
+      choose "question[answers_attributes][1][truth_value]", option: true
       click_button "Create Question"
+
       expect(page).to have_content "Text can't be blank" 
+      # expect(page).to have_content "Answers cannot be blank"
     end
 
     it "should persist submitted data in dynamically generated fields", js: true do
@@ -94,9 +102,7 @@ RSpec.describe "New Multiple-Choice Questions" do
     end
   end
 
-  it "should display an error message when no correct answer is submitted"
-
-  context "when fewer than two submitted answers" do
+  context "with fewer than two submitted answers" do
     it "should display an error message", js: true do
       fill_in "Text", with: "Who is on first?"
       fill_in "Description", with: "This test will build your critical thinking ability"
@@ -108,7 +114,23 @@ RSpec.describe "New Multiple-Choice Questions" do
       expect(page).to have_content "Multiple choice questions should have at least two choices"
     end
   end
-  it "should display an error message when written text is not alphanumeric"
-  it "should display an error message when submitted without a correct answer"
-  it "should display an error message when submitted without answers"
+
+  context "with all false answer submissions" do
+    it "should display an error message", js: true do
+      fill_in "question[answers_attributes][0][text]", with: "Hu"
+      choose "question[answers_attributes][0][truth_value]", option: false
+      add_answer = find("a#add_answer")
+      add_answer.click
+      fill_in "question[answers_attributes][1][text]", with: "Who"
+      choose "question[answers_attributes][1][truth_value]", option: false
+      add_answer.click
+      fill_in "question[answers_attributes][2][text]", with: "Scooby Doo"
+      choose "question[answers_attributes][2][truth_value]", option: false
+
+      click_button "Create Question"
+      expect(page).to have_content "All Multiple choice options cannot be false"
+    end
+  end
+
+  # it "should display an error message when written text is not alphanumeric"
 end
