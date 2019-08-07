@@ -16,8 +16,8 @@ RSpec.describe "Multiple-Choice Questions" do
   end
 
   context "when added to decks by users" do
-    it "can be seen on questions list"
 =begin
+    it "can be seen on questions list"
       fill_in "Text", with: "Who is on first?"
       fill_in "Description", with: "This test will build your critical thinking ability"
       choose "question_type", option: "multiple_choice"
@@ -49,16 +49,13 @@ RSpec.describe "Multiple-Choice Questions" do
       expect(page).to have_content "Description can't be blank"
     end
 
-=begin
-    context "when more than two valid answers are given" do
-      it "should ignore empty answers"
-    end 
+    it "should ignore extra answers"
 
     context "should display an error" do
-      it "when more than one answer is given" do
+      it "when more than one correct answer is given", js: true do
         fill_in "Text", with: "Who is on first?"
         fill_in "Description", with: "This test will build your critical thinking ability"
-        choose "question[type]", option: 0 
+        choose "question[question_type]", option: 0 
 
         fill_in "question[answers_attributes][0][text]", with: "Hu"
         choose "question[answers_attributes][0][truth_value]", option: true
@@ -68,15 +65,14 @@ RSpec.describe "Multiple-Choice Questions" do
         choose "question[answers_attributes][1][truth_value]", option: true
 
         click_button "Create Question"
-        expect(page).to have_content "Multiple-Choice questions should only have one correct answer"
+        expect(page).to have_content "Multiple choice questions should only have one correct answer"
       end
 
-      it "when no answer is submitted"
+      it "when no correct answer is submitted"
 
       it "when fewer than two answers are submitted"
 
       it "when written text is not alpha numeric"
     end
-=end
   end
 end

@@ -3,8 +3,6 @@ class QuestionsController < ApplicationController
   before_action :set_deck
 
   def create
-    Rails.logger.info question_params
-
     @question = @deck.questions.build(question_params)
 
     respond_to do |format|

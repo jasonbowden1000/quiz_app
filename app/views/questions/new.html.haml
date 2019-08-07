@@ -1,34 +1,43 @@
-%h2 Add Question
-= simple_form_for([@deck, @question], html: { id: "new_question_form" }) do |f|
-  = f.error_notification
-  .field
-    .control
-      = f.input :text, required: true, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
-  .field
-    .control
-      = f.input :description, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
-  .control   
-    %label.radio
-      %input{type: "radio", name: "question[question_type]", value: 0, checked: "checked" }
-        Multiple Choice
-      %input{type: "radio", name: "question[question_type]", value: 1 }
-        Multiple Answer
-      %input{type: "radio", name: "question[question_type]", value: 2 }
-        True/False
-      %input{type: "radio", name: "question[question_type]", value: 3 }
-        Written
-  .field
-    .control
-      %label.label Question 1: Answer
-      %input{class: "input", type: "text", name: "question[answers_attributes][444][text]"}
-  .field
-    .control
-      %label.label Question 1: Truth-value
-      %input{type: "radio", name: "question[answers_attributes][444][truth_value]", value: "true" }
-        True
-      %input{type: "radio", name: "question[answers_attributes][444][truth_value]",  value: "false" }
-        False
+.section
+  .container
+    %h3.title.is-3 Add Question
+    = simple_form_for([@deck, @question], html: { id: "new_question_form" }) do |f|
+      .error
+        = f.error_notification
+      .error
+        = f.error :base
+      .field
+        .control
+          = f.input :text, required: true, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
+      .field
+        .control
+          = f.input :description, required: true, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
+      .field
+        .control   
+          %label.radio
+            %input{type: "radio", name: "question[question_type]", value: 0, checked: "checked" }
+            Multiple Choice
+          %label.radio
+            %input{type: "radio", name: "question[question_type]", value: 1 }
+            Multiple Answer
+          %label.radio
+            %input{type: "radio", name: "question[question_type]", value: 2 }
+            True/False
+          %label.radio
+            %input{type: "radio", name: "question[question_type]", value: 3 }
+            Written
+      %br/
+      .field
+        .control
+          %label.label Answer 1:
+          %input{class: "input", type: "text", name: "question[answers_attributes][0][text]"}
+          %label.radio
+            %input{type: "radio", name: "question[answers_attributes][0][truth_value]", value: "true" }
+            True
+          %label.radio
+            %input{type: "radio", name: "question[answers_attributes][0][truth_value]",  value: "false" }
+            False
 
-  %a#add_answer.button Add Answer
-  = f.button :submit, "Create Question", class: "button is-primary"
+      %a#add_answer.button Add Answer
+      = f.button :submit, "Create Question", class: "button is-primary"
 
