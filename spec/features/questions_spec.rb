@@ -95,6 +95,16 @@ RSpec.describe "New Multiple-Choice Questions" do
   end
 
   it "should display an error message when no correct answer is submitted"
-  it "should display an error message when fewer than two answers are submitted"
+
+  context "when fewer than two answers are submitted" do
+    it "should display an error message" do
+      fill_in "Text", with: "Who is on first?"
+      fill_in "Description", with: "This test will build your critical thinking ability"
+      choose "question[question_type]", option: 0 
+      fill_in "question[answers_attributes][0][text]", with: "Hu"
+      choose "question[answers_attributes][0][truth_value]", option: true
+
+    end
+  end
   it "should display an error message when written text is not alphanumeric"
 end
