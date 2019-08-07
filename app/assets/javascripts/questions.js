@@ -2,10 +2,10 @@
 // All this logic will automatically be available in application.js.
 document.addEventListener('turbolinks:load', function() {
   const newQuestionForm = document.getElementById('new_question_form');
-  var count = 0;
 
   if (newQuestionForm) {
     const addAnswerButton = document.getElementById('add_answer');
+    let count = 0;
     addAnswerButton.addEventListener('click', addAnswerToForm);
 
     function addAnswerToForm() {
