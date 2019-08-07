@@ -57,11 +57,11 @@ RSpec.describe "New Multiple-Choice Questions" do
       add_answer.click
       fill_in "question[answers_attributes][3][text]", with: "The Fonz"
       choose "question[answers_attributes][3][truth_value]", option: false
+
       click_button "Create Question"
 
       expect(page.all(".answer").count).to eql(4)
       expect(page).to have_selector("input[value='The Fonz'")
-
       expect(find("#answer_true_1")).to be_checked
       expect(find("#answer_false_2")).to be_checked
     end
@@ -81,7 +81,6 @@ RSpec.describe "New Multiple-Choice Questions" do
       fill_in "Text", with: "Who is on first?"
       fill_in "Description", with: "This test will build your critical thinking ability"
       choose "question[question_type]", option: 0 
-
       fill_in "question[answers_attributes][0][text]", with: "Hu"
       choose "question[answers_attributes][0][truth_value]", option: true
       add_answer = find("a#add_answer")
@@ -90,21 +89,26 @@ RSpec.describe "New Multiple-Choice Questions" do
       choose "question[answers_attributes][1][truth_value]", option: true
 
       click_button "Create Question"
+
       expect(page).to have_content "Multiple choice questions should only have one correct answer"
     end
   end
 
   it "should display an error message when no correct answer is submitted"
 
-  context "when fewer than two answers are submitted" do
-    it "should display an error message" do
+  context "when fewer than two submitted answers" do
+    it "should display an error message", js: true do
       fill_in "Text", with: "Who is on first?"
       fill_in "Description", with: "This test will build your critical thinking ability"
       choose "question[question_type]", option: 0 
       fill_in "question[answers_attributes][0][text]", with: "Hu"
       choose "question[answers_attributes][0][truth_value]", option: true
 
+      click_button "Create Question"
+      expect(page).to have_content "Multiple choice questions should have at least two choices"
     end
   end
   it "should display an error message when written text is not alphanumeric"
+  it "should display an error message when submitted without a correct answer"
+  it "should display an error message when submitted without answers"
 end
