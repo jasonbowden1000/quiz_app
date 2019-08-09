@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_231004) do
+ActiveRecord::Schema.define(version: 2019_08_08_012036) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean "truth_value", default: true
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2019_08_07_231004) do
     t.string "title"
     t.text "description"
     t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "decks_quizzes", id: false, force: :cascade do |t|
+    t.integer "quiz_id", null: false
+    t.integer "deck_id", null: false
+    t.index ["deck_id", "quiz_id"], name: "index_decks_quizzes_on_deck_id_and_quiz_id"
+    t.index ["quiz_id", "deck_id"], name: "index_decks_quizzes_on_quiz_id_and_deck_id"
   end
 
   create_table "questions", force: :cascade do |t|

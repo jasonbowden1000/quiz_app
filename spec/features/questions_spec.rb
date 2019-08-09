@@ -3,8 +3,7 @@ require "rails_helper"
 RSpec.describe "New Multiple-Choice Questions" do
   MULTIPLE_CHOICE = 0
   let(:user1) { FactoryBot.create(:user) }
-  let!(:deck1) { FactoryBot.create(:deck, id: 123, title: "My Armors", description: "Don't leave home without them", user: user1 )}
-  let!(:deck2) { FactoryBot.create(:deck, id: 456, title: "Rogues Gallery", description: "baddies", user: user1 )}
+  let!(:deck1) { FactoryBot.create(:deck, title: "My Armors", description: "Don't leave home without them", user: user1 )}
 
   def fill_in_answer(index:, text:, truth_value:)
     fill_in "question[answers_attributes][#{index}][text]", with: text

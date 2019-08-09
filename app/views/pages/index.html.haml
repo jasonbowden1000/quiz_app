@@ -8,6 +8,10 @@
       .section
         .container
           %h3.title.is-3 Decks
-          %p.content Decks are reusable sets of questions. Quizzes are composed of decks; decks can be reused in multiple quizzes.
+          %p.content Decks are reusable sets of questions. 
           %p.content 
             = link_to "Manage Decks", decks_path, class: "button is-primary"
+          %h3.title.is-3 Quizzes
+          %p.content Your quizzes are composed decks. Add various decks to have a quiz with different topics.
+          %p.content
+            = link_to "Manage Quizzes", quizzes_path, class: "button is-primary"

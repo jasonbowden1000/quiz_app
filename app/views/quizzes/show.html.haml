@@ -6,7 +6,14 @@
 %p
   %b Description:
   = @quiz.description
-
+- if @quiz.decks.any?
+  %p List of decks
+  %ul
+    - @quiz.decks.each do |deck|
+      %li
+        = deck.title
+- else
+  %p no decks added yet
 = link_to 'Edit', edit_quiz_path(@quiz)
 \|
 = link_to 'Back', quizzes_path

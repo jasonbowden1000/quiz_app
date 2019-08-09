@@ -4,17 +4,18 @@ class QuizzesController < ApplicationController
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = Quiz.all
+    @quizzes = current_user.quizzes
   end
 
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
+    @decks = @quiz.decks
   end
 
   # GET /quizzes/new
   def new
-    @quiz = Quiz.new
+    @quiz = current_user.quizzes.build
   end
 
   # GET /quizzes/1/edit
@@ -24,11 +25,11 @@ class QuizzesController < ApplicationController
   # POST /quizzes
   # POST /quizzes.json
   def create
-    @quiz = Quiz.new(quiz_params)
+    @quiz = current_user.quizzes.build(quiz_params)
 
     respond_to do |format|
       if @quiz.save
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
+        format.html { redirect_to quizzes_path, notice: 'Quiz was successfully created.' }
         format.json { render :show, status: :created, location: @quiz }
       else
         format.html { render :new }
@@ -69,6 +70,6 @@ class QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:title, :description)
+      params.require(:quiz).permit(:title, :description, deck_ids: [])
     end
 end

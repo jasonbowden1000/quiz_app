@@ -1,23 +1,26 @@
-%h1 Listing quizzes
-
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th
-      %th
-      %th
-
-  %tbody
-    - @quizzes.each do |quiz|
-      %tr
-        %td= quiz.title
-        %td= quiz.description
-        %td= link_to 'Show', quiz
-        %td= link_to 'Edit', edit_quiz_path(quiz)
-        %td= link_to 'Destroy', quiz, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
+.section
+  .container
+    %h2.title.is-2 Your Quizzes
+    - if @quizzes.any?
+      - @quizzes.each do |quiz|
+        .content.quiz{id: "quiz_#{quiz.id}"}
+          .card
+            %header.card-header
+              %p.card-header-title
+                = quiz.title
+              = link_to "#" do
+                %span.icon
+                  %i.fas.fa-angle-down
+            .card-content
+              .content
+                = quiz.description
+            %footer.card-footer
+              = link_to "View", quiz, class: "card-footer-item"
+              = link_to "Delete", quiz, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
+    - else
+      .content
+        %p You currently have no quizzes.
+    .content
+      = link_to "Add Quiz", new_deck_path, class: "button is-primary"
 
 = link_to 'New Quiz', new_quiz_path

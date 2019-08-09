@@ -15,7 +15,7 @@ class DecksController < ApplicationController
 
   # GET /decks/new
   def new
-    @deck = Deck.new
+    @deck = current_user.decks.build
   end
 
   # GET /decks/1/edit
@@ -25,8 +25,7 @@ class DecksController < ApplicationController
   # POST /decks
   # POST /decks.json
   def create
-    @deck = Deck.new(deck_params)
-    @deck.user_id = current_user.id
+    @deck = current_user.decks.build(deck_params)
 
     respond_to do |format|
       if @deck.save
@@ -66,7 +65,7 @@ class DecksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_deck
-      @deck = Deck.find(params[:id])
+      @deck = current_user.decks.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

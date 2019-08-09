@@ -1,37 +1,4 @@
 .section
   .container
     %h3.title.is-3 Add Question
-    = simple_form_for([@deck, @question], html: { id: "new_question_form" }) do |f|
-      .error
-        = f.error_notification
-      .error
-        = f.error :base
-      .field
-        .control
-          = f.input :text, required: true, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
-      .field
-        .control
-          = f.input :description, required: true, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" }
-      .field
-        .control   
-          %label.radio
-            %input{type: "radio", name: "question[question_type]", value: 0, checked: "checked" }
-            Multiple Choice
-          %label.radio
-            %input{type: "radio", name: "question[question_type]", value: 1 }
-            Multiple Answer
-          %label.radio
-            %input{type: "radio", name: "question[question_type]", value: 2 }
-            True/False
-          %label.radio
-            %input{type: "radio", name: "question[question_type]", value: 3 }
-            Written
-      %br/
-      - if @question.answers.present?
-        - @question.answers.each_with_index do |answer, index|
-          = render "answer_form", index: index, answer_truth_value: answer.truth_value, answer_text: answer.text
-      - else
-        = render "answer_form", index: 0, answer_truth_value: true, answer_text: ""
-      %a#add_answer.button Add Answer
-      = f.button :submit, "Create Question", class: "button is-primary"
-
+    = render "form", deck: @deck, question: @question
