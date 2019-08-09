@@ -1,7 +1,7 @@
-%h1 Editing quiz
-
-= render 'form'
-
-= link_to 'Show', @quiz
-\|
-= link_to 'Back', quizzes_path
+.section
+  .container
+    %h3.title.is-3 Edit quiz
+    = render 'form'
+    = link_to 'Show', @quiz
+    \|
+    = link_to 'Back', quizzes_path

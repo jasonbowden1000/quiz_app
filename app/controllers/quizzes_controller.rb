@@ -1,29 +1,22 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
 
-  # GET /quizzes
-  # GET /quizzes.json
   def index
     @quizzes = current_user.quizzes
   end
 
-  # GET /quizzes/1
-  # GET /quizzes/1.json
   def show
+    # ???
     @decks = @quiz.decks
   end
 
-  # GET /quizzes/new
   def new
     @quiz = current_user.quizzes.build
   end
 
-  # GET /quizzes/1/edit
   def edit
   end
 
-  # POST /quizzes
-  # POST /quizzes.json
   def create
     @quiz = current_user.quizzes.build(quiz_params)
 
@@ -65,7 +58,8 @@ class QuizzesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
-      @quiz = Quiz.find(params[:id])
+      Rails.logger.info "SET QUIZ"
+      @quiz = current_user.quizzes.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

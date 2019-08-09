@@ -1,13 +1,20 @@
 = simple_form_for(@quiz) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-  = debug @quiz.errors
 
-  .form-inputs
-    = f.input :title
-    = f.input :description
-
-    = f.association :decks, as: :check_boxes
-
+  .field
+    .control
+      = f.input :title, required: true, input_html: { class: "input" }, wrapper: false
+  .field
+    .control
+      = f.input :description, required: true, input_html: { class: "input" }, wrapper: false
+  %h4.title.is-4 Select Decks
+  - if current_user.decks.any?
+    - current_user.decks.each do |deck|
+      .label.checkbox
+        %input{type: "checkbox"}
+        deck.title
+  = f.association :decks, as: :check_boxes, collection: current_user.decks, wrapper: false, label: false do |cb|
+    cb.label
   .form-actions
     = f.button :submit

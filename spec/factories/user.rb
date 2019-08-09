@@ -13,8 +13,17 @@ FactoryBot.define do
       end
 
       after(:create) do |user, evaluator|
-        Rails.logger.info "Creating #{evaluator.quizzes_count} number of quizzes"
         create_list(:quiz, evaluator.quizzes_count, user: user)
+      end
+    end
+
+    factory :user_with_decks do
+      transient do
+        decks_count { 3 }
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:deck, evaluator.decks_count, user: user)
       end
     end
   end
