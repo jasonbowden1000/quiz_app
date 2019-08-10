@@ -58,7 +58,6 @@ class QuizzesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
-      Rails.logger.info "SET QUIZ"
       @quiz = current_user.quizzes.find(params[:id])
     end
 

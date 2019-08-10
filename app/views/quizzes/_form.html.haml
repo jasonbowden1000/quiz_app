@@ -9,12 +9,7 @@
     .control
       = f.input :description, required: true, input_html: { class: "input" }, wrapper: false
   %h4.title.is-4 Select Decks
-  - if current_user.decks.any?
-    - current_user.decks.each do |deck|
-      .label.checkbox
-        %input{type: "checkbox"}
-        deck.title
-  = f.association :decks, as: :check_boxes, collection: current_user.decks, wrapper: false, label: false do |cb|
-    cb.label
+  = f.association :decks, as: :check_boxes,  collection: current_user.decks, item_wrapper_tag: false, wrapper: false, |
+    label: false, input_html: { class: "deck_check_box"}, item_label_class: "label"
   .form-actions
     = f.button :submit

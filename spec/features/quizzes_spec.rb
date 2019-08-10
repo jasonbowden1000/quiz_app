@@ -36,7 +36,6 @@ RSpec.describe "Quizzes" do
       visit "/"
       click_link "Manage Quizzes"
 
-      Rails.logger.info "ABOUT TO CLICK NEW QUIZ"
       click_link "New Quiz"
 
       expect(page).to have_selector('.deck_check_box', count: user4.decks.length)
