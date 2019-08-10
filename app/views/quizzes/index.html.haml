@@ -14,13 +14,18 @@
             .card-content
               .content
                 = quiz.description
+              .content
+                - if quiz.decks.any?
+                  Decks:
+                  = safe_join(quiz.decks.map { |d| link_to d.title, deck_path(d)  }, ", ".html_safe)
+                - else
+                  This quiz has no decks. Add a deck!
             %footer.card-footer
-              = link_to "View", quiz, class: "card-footer-item"
+              = link_to "Placeholder", "#", class: "card-footer-item"
+              = link_to "Placeholder", "#", class: "card-footer-item"
               = link_to "Delete", quiz, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
     - else
       .content
         %p You currently have no quizzes.
     .content
-      = link_to "Add Quiz", new_deck_path, class: "button is-primary"
-
-= link_to 'New Quiz', new_quiz_path
+      = link_to "New Quiz", new_quiz_path, class: "button is-primary"

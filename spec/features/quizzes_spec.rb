@@ -2,28 +2,29 @@ require "rails_helper"
 
 RSpec.describe "Quizzes" do
   let!(:user1) { FactoryBot.create(:user) }
-  let!(:user2) { FactoryBot.create(:user_with_quizzes, quizzes_count: 5 )}
-  let!(:user3) { FactoryBot.create(:user_with_quizzes, quizzes_count: 7 )}
-  let!(:user4) { FactoryBot.create(:user_with_decks, decks_count: 5 )}
-  let!(:user5) { FactoryBot.create(:user_with_decks, decks_count: 7 )}
-  # let!(:user4) { FactoryBot.create(:user, first_name: "Solus" )}
-  # let!(:quiz2) { FactoryBot.create(:deck, title: "User 2 Quiz", user: user2) }
-  # let!(:user3) { FactoryBot.create(:user_with_quizzes, user: user3 )}
+  let!(:user2) { FactoryBot.create(:user_with_quizzes, quizzes_count: 3 )}
+  let!(:user3) { FactoryBot.create(:user_with_quizzes, quizzes_count: 5 )}
+  let!(:user4) { FactoryBot.create(:user_with_decks, decks_count: 3 )}
+  let!(:user5) { FactoryBot.create(:user_with_decks, decks_count: 5 )}
 
   context "when created" do
     it "should be visible on the user's main quiz page" do
-      login_as(user1)
+      login_as(user4)
+      odd_decks, even_decks = user4.decks.partition.each_with_index { |d, i| i.odd? }
+
       visit "/"
       click_link "Manage Quizzes"
       click_link "New Quiz"
       fill_in "Title", with: "Linux"
       fill_in "Description", with: "very useful knowledge"
-
+      odd_decks.each { |deck| check("quiz_deck_ids_#{deck.id}") }
       click_button "Create Quiz"
 
       expect(page.first("h2").text).to eql("Your Quizzes")
       expect(page).to have_content "Linux"
       expect(page).to have_content "very useful knowledge"
+      odd_decks.each { |deck| expect(page).to have_content deck.title }
+      even_decks.each { |deck| expect(page).not_to have_content deck.title }
     end
   end
 
@@ -40,14 +41,6 @@ RSpec.describe "Quizzes" do
 
       expect(page).to have_selector('.deck_check_box', count: user4.decks.length)
     end
-  end
-
-  context "after adding decks" do
-    it "display a deck list on their individual page"
-      # A quiz should be ready
-      # some decks should be ready
-      # decks should be associated with quizzes
-      # goto the quizzes page
   end
 
   context "when created" do

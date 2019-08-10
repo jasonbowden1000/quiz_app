@@ -2,23 +2,17 @@ class DecksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_deck, only: [:show, :edit, :update, :destroy]
 
-  # GET /decks
-  # GET /decks.json
   def index
     @decks = current_user.decks
   end
 
-  # GET /decks/1
-  # GET /decks/1.json
   def show
   end
 
-  # GET /decks/new
   def new
     @deck = current_user.decks.build
   end
 
-  # GET /decks/1/edit
   def edit
   end
 
@@ -38,8 +32,6 @@ class DecksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /decks/1
-  # PATCH/PUT /decks/1.json
   def update
     respond_to do |format|
       if @deck.update(deck_params)
@@ -52,8 +44,6 @@ class DecksController < ApplicationController
     end
   end
 
-  # DELETE /decks/1
-  # DELETE /decks/1.json
   def destroy
     @deck.destroy
     respond_to do |format|

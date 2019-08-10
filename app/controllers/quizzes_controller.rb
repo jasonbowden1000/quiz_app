@@ -5,11 +5,6 @@ class QuizzesController < ApplicationController
     @quizzes = current_user.quizzes
   end
 
-  def show
-    # ???
-    @decks = @quiz.decks
-  end
-
   def new
     @quiz = current_user.quizzes.build
   end
