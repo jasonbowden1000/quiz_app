@@ -19,9 +19,10 @@
                   Decks:
                   = safe_join(quiz.decks.map { |d| link_to d.title, deck_path(d)  }, ", ".html_safe)
                 - else
-                  This quiz has no decks. Add a deck!
+                  This quiz has no decks.
+                  = link_to "Add a deck!", edit_quiz_path(quiz)
             %footer.card-footer
-              = link_to "Placeholder", "#", class: "card-footer-item"
+              = link_to "Edit", edit_quiz_path(quiz), class: "card-footer-item"
               = link_to "Placeholder", "#", class: "card-footer-item"
               = link_to "Delete", quiz, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
     - else

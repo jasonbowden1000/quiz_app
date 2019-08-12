@@ -1,0 +1,14 @@
+.field.choice
+  .control
+    %label.label 
+      = "Choice #{index + 1}:"
+    %input{class: "input", required: true, type: "text", name: "question[choices_attributes][#{index}][text]", |
+      value: choice_text, id: "choice_text_#{index}"  }
+    %label.radio
+      %input{type: "radio", name: "question[choices_attributes][#{index}][truth_value]", value: "true", |
+        id: "choice_true_#{index}", checked: choice_truth_value == true || nil }
+      True
+    %label.radio
+      %input{type: "radio", name: "question[choices_attributes][#{index}][truth_value]",  value: "false", |
+        id: "choice_false_#{index}", checked: choice_truth_value == false || nil }
+      False

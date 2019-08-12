@@ -24,11 +24,11 @@
         %input{type: "radio", name: "question[question_type]", value: 3 }
         Written
   %br/
-  - if @question.answers.present?
-    - @question.answers.each_with_index do |answer, index|
-      = render "answer_form", index: index, answer_truth_value: answer.truth_value, answer_text: answer.text
+  - if @question.choices.present?
+    - @question.choices.each_with_index do |choice, index|
+      = render "choice_form", index: index, choice_truth_value: choice.truth_value, choice_text: choice.text
   - else
-    = render "answer_form", index: 0, answer_truth_value: true, answer_text: ""
-  %a#add_answer.button Add Answer
+    = render "choice_form", index: 0, choice_truth_value: true, choice_text: ""
+  %a#add_choice.button Add Choice
   = f.button :submit, "Create Question", class: "button is-primary"
 

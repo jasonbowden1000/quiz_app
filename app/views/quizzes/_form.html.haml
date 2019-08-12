@@ -12,4 +12,4 @@
   = f.association :decks, as: :check_boxes,  collection: current_user.decks, item_wrapper_tag: false, wrapper: false, |
     label: false, input_html: { class: "deck_check_box"}, item_label_class: "checkbox label"
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: "is-primary button"
