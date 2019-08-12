@@ -1,6 +1,15 @@
 .section
   .container 
     %h3.title.is-3 Deck Questions
+- if @deck.questions.any?
+  .section
+    .container
+      %ul
+        - @deck.questions.each do |question|
+          %li
+            = question.text
+- else
+  %p This deck has no questions
 .section
   .container
     = link_to "Add Question", new_deck_question_path, class: "button is-primary"

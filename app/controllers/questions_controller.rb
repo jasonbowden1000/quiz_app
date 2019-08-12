@@ -17,7 +17,6 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = @deck.questions
   end
 
   def new

@@ -11,7 +11,7 @@ RSpec.describe "New Multiple-Choice Questions" do
   end
 
   def setup_question
-    fill_in "Text", with: "Who is on first?"
+    fill_in "Text", with: "Who's on first?"
     fill_in "Description", with: "This test will build your critical thinking ability"
     choose "question[question_type]", option: MULTIPLE_CHOICE
   end
@@ -39,6 +39,7 @@ RSpec.describe "New Multiple-Choice Questions" do
       click_button "Create Question"
 
       expect(page).to have_content "Question was successfully created."
+      expect(page).to have_content "Who's on first?"
     end
   end
 

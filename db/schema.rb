@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_035358) do
+ActiveRecord::Schema.define(version: 2019_08_12_060403) do
+
+  create_table "answers", force: :cascade do |t|
+    t.boolean "answered", default: false
+    t.integer "order"
+    t.integer "questions_id"
+    t.integer "attempts_id"
+    t.boolean "correct"
+    t.index ["attempts_id"], name: "index_answers_on_attempts_id"
+    t.index ["questions_id"], name: "index_answers_on_questions_id"
+  end
+
+  create_table "attempts", force: :cascade do |t|
+    t.integer "status"
+    t.integer "quizzes_id"
+    t.integer "users_id"
+    t.index ["quizzes_id"], name: "index_attempts_on_quizzes_id"
+    t.index ["users_id"], name: "index_attempts_on_users_id"
+  end
 
   create_table "choices", force: :cascade do |t|
     t.string "text"
