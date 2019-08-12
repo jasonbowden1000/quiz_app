@@ -23,7 +23,8 @@
                   = link_to "Add a deck!", edit_quiz_path(quiz)
             %footer.card-footer
               = link_to "Edit", edit_quiz_path(quiz), class: "card-footer-item"
-              = link_to "Placeholder", "#", class: "card-footer-item"
+              = simple_form_for(quiz, as: quiz, method: :post, url: attempts_path) do |f|
+                = f.submit "Take Quiz"
               = link_to "Delete", quiz, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
     - else
       .content

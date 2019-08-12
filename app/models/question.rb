@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :deck
   has_many :choices
+  has_many :problems
   accepts_nested_attributes_for :choices
   
   validates :text, presence: true

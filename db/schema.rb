@@ -10,24 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_060403) do
-
-  create_table "answers", force: :cascade do |t|
-    t.boolean "answered", default: false
-    t.integer "order"
-    t.integer "questions_id"
-    t.integer "attempts_id"
-    t.boolean "correct"
-    t.index ["attempts_id"], name: "index_answers_on_attempts_id"
-    t.index ["questions_id"], name: "index_answers_on_questions_id"
-  end
+ActiveRecord::Schema.define(version: 2019_08_12_112721) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer "status"
-    t.integer "quizzes_id"
-    t.integer "users_id"
-    t.index ["quizzes_id"], name: "index_attempts_on_quizzes_id"
-    t.index ["users_id"], name: "index_attempts_on_users_id"
+    t.integer "user_id"
+    t.integer "quiz_id"
+    t.index ["quiz_id"], name: "index_attempts_on_quiz_id"
+    t.index ["user_id"], name: "index_attempts_on_user_id"
   end
 
   create_table "choices", force: :cascade do |t|
@@ -53,6 +43,16 @@ ActiveRecord::Schema.define(version: 2019_08_12_060403) do
     t.integer "deck_id", null: false
     t.index ["deck_id", "quiz_id"], name: "index_decks_quizzes_on_deck_id_and_quiz_id"
     t.index ["quiz_id", "deck_id"], name: "index_decks_quizzes_on_quiz_id_and_deck_id"
+  end
+
+  create_table "problems", force: :cascade do |t|
+    t.boolean "answered"
+    t.integer "order"
+    t.boolean "correct"
+    t.integer "attempt_id"
+    t.integer "question_id"
+    t.index ["attempt_id"], name: "index_problems_on_attempt_id"
+    t.index ["question_id"], name: "index_problems_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|
