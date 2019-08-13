@@ -105,6 +105,8 @@ GEM
     factory_bot_rails (5.0.2)
       factory_bot (~> 5.0.2)
       railties (>= 4.2.0)
+    faker (1.9.6)
+      i18n (>= 0.7)
     ffi (1.11.1)
     font_awesome5_rails (0.7.0)
       railties (>= 4.2)
@@ -307,6 +309,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise (~> 4.6, >= 4.6.2)
   factory_bot_rails
+  faker (~> 1.6, >= 1.6.3)
   font_awesome5_rails (~> 0.7.0)
   guard (~> 2.15)
   guard-livereload (~> 2.5, >= 2.5.2)

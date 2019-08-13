@@ -48,6 +48,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'better_errors', '~> 2.5', '>= 2.5.1'
   gem 'binding_of_caller', '~> 0.8.0'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
 end
 
 group :development do
