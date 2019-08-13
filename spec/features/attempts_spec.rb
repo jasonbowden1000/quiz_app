@@ -33,10 +33,11 @@ RSpec.describe "Attempts" do
     end
   end
 
-  describe "when viewed" do
+  describe "when beginning" do
     it "should display a Take Quiz button when untaken"
     it "should display a Continue Quiz button when in progress"
     it "should display a View Stats button when finished"
+    it "should not display Take Quiz for quizzes where every deck is empty"
   end
 
   describe "taken by users" do

@@ -16,8 +16,6 @@ class DecksController < ApplicationController
   def edit
   end
 
-  # POST /decks
-  # POST /decks.json
   def create
     @deck = current_user.decks.build(deck_params)
 

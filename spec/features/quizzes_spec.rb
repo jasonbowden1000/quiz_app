@@ -101,8 +101,5 @@ RSpec.describe "Quizzes" do
 
       expect(page).to have_selector('.quiz', count: user3.quizzes.length)
     end
-
-    it "should list their decks" do
-    end
   end
 end
