@@ -1,35 +1,17 @@
 require "rails_helper"
 
-# I need
-# quizzes with decks
-# decks with questions
-# questions with choices
-# quizzes with attempts
-# attempts with answers
-# answers with choices
-# all of this shit has a user
-
 RSpec.describe "Attempts" do
 
-=begin
-  let!(:question1) { }
-  let!(:question2) { }
-  let!(:question3) { }
+  let!(:user1) { FactoryBot.create(:user) }
+  let!(:quiz1) { FactoryBot.create(:quiz_with_decks) }
 
-  let!(:deck1) { }
-  let!(:deck2) { } 
-  let!(:deck3) { }
-  let!(:quiz1) { }
-  let!(:quiz2) { }
-  let!(:quiz3) { }
-=end
-
-  let!(:user1) { FactoryBot.create(:user_with_quizzes, quizzes_count: 3 )}
+  # This needs a quiz, with decks, with questions
 
   describe "can be started by users" do
     it "by clicking the Take test button" do
       login_as(user1)
       visit quizzes_path
+      expect(2+2).to eql(4)
     end
   end
 

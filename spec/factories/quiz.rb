@@ -4,5 +4,14 @@ FactoryBot.define do
     title { "Software Languages" }
     description { "Stay sharp" }
     user
+
+    factory :quiz_with_decks do
+      after(:create) do |quiz| 
+        # create(:deck, quiz: quiz)
+        # create(:deck, quiz: quiz)
+        # create(:deck, quiz: quiz)
+        create_list(:deck, 3, quizzes: [quiz])
+      end
+    end
   end
 end
