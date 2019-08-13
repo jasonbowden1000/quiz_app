@@ -6,11 +6,12 @@ FactoryBot.define do
     user
 
     factory :quiz_with_decks do
-      after(:create) do |quiz| 
-        # create(:deck, quiz: quiz)
-        # create(:deck, quiz: quiz)
-        # create(:deck, quiz: quiz)
-        create_list(:deck, 3, quizzes: [quiz])
+      transient do
+        decks_count { 3 } 
+      end
+
+      after(:create) do |quiz, evaluator| 
+        create_list(:deck_with_questions, evaluator.decks_count, quizzes: [quiz])
       end
     end
   end
