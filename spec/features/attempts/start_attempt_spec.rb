@@ -9,7 +9,11 @@ RSpec.describe "Attempts" do
     it "by clicking the Take test button" do
       login_as(user1)
       visit quizzes_path
-      expect(2+2).to eql(4)
+      within("div#quiz_#{quiz1.id}") do
+        click_button "Take Quiz"
+      end
+
+      # expect page to hvae some stuff
     end
   end
 end

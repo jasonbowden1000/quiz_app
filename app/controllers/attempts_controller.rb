@@ -1,8 +1,5 @@
 class AttemptsController < ApplicationController
   def create
-    # https://stackoverflow.com/questions/31409792/rails-undefined-method-for-activerecord-associations-collectionproxy
-    # ^^^ try soon
-
     quiz = current_user.quizzes.find(params[:quiz][:id])
 
     attempt_params = {
