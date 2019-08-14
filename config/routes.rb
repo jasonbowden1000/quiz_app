@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     resources :questions
   end
 
-  resources :attempts, path: :quiz do
+  get 'stats', to: 'attempts#index'
+  resources :attempts, path: :quiz, except: [:index] do
     resources :problems, param: :problem_order
   end
 
