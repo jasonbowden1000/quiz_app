@@ -17,7 +17,7 @@ class Attempt < ApplicationRecord
   private
 
   def finished_problems
-    problems.select { |p| p.answered == true }
+    problems.select(&:answered?)
   end
 
   def populate_problems
