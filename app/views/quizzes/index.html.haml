@@ -23,9 +23,12 @@
                   = link_to "Add a deck!", edit_quiz_path(quiz)
             %footer.card-footer
               = link_to "Edit", edit_quiz_path(quiz), class: "card-footer-item"
-              = simple_form_for(quiz, method: :post, url: attempts_path, html: { class: "card-footer-item" } ) do |f|
-                = f.input :id, as: :hidden, wrapper: false
-                = f.submit "Take Quiz", class: "link-button"
+              - if quiz.questions.any?
+                = simple_form_for(quiz, method: :post, url: attempts_path, html: { class: "card-footer-item" } ) do |f|
+                  = f.input :id, as: :hidden, wrapper: false
+                  = f.submit "Take Quiz", class: "link-button"
+              - else 
+                = link_to "Manage Decks", decks_path
               = link_to "Delete", quiz, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
     - else
       .content
