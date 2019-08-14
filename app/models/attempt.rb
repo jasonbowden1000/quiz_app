@@ -4,6 +4,8 @@ class Attempt < ApplicationRecord
   belongs_to :quiz
   has_many :problems
 
+  delegate :title, to: :quiz
+
   def first_problem
     problems.where(order: 1).first
   end
