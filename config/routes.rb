@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :questions
   end
 
-  resources :attempts do
+  resources :attempts, path: :quiz do
     resources :problems
   end
 
