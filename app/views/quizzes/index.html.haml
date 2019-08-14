@@ -28,7 +28,7 @@
                   = f.input :id, as: :hidden, wrapper: false
                   = f.submit "Take Quiz", class: "link-button"
               - else 
-                = link_to "Manage Decks", decks_path
+                = link_to "Manage Decks", decks_path, class: "card-footer-item"
               = link_to "Delete", quiz, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
     - else
       .content

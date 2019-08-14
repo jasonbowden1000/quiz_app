@@ -22,12 +22,20 @@ RSpec.describe "Attempts" do
   end
 
   describe "can't be started by users" do
-    it "with quizzes without decks" 
+    it "with quizzes without decks" do 
+      login_as(user3)
+      visit quizzes_path
+
+      within("div#quiz_#{quiz3.id}") do
+        expect(page).not_to have_button "Take Quiz"
+        expect(page).to have_content "This quiz has no decks."
+        expect(page).to have_link "Add a deck!"
+      end
+   end
 
     it "when all decks of a quiz are empty" do
       login_as(user2)
       visit quizzes_path
-      Rails.logger.info quizzes_path
 
       within("div#quiz_#{quiz2.id}") do
         expect(page).not_to have_button "Take Quiz"

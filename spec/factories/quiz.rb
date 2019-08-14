@@ -10,10 +10,6 @@ FactoryBot.define do
     end
 
     factory :quiz_with_decks do
-      transient do
-        decks_count { 3 } 
-      end
-
       after(:create) do |quiz, evaluator| 
         create_list(:deck_with_questions, evaluator.decks_count, quizzes: [quiz])
       end
