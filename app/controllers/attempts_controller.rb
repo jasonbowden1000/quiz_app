@@ -2,16 +2,7 @@ class AttemptsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    quiz = current_user.quizzes.find(params[:quiz][:id])
-
-    attempt_params = {
-      quiz_id: quiz.id,
-      problems_attributes: quiz.questions.shuffle.each.with_index(1).map { |q, i| {
-        question_id: q.id, order: i }
-      }
-    }
-
-    @attempt = current_user.attempts.build(attempt_params)
+    @attempt = current_user.attempts.build(quiz_id: attempts_params[:id])
 
     respond_to do |format|
       if @attempt.save
@@ -29,5 +20,9 @@ class AttemptsController < ApplicationController
 
   def index
     @attempts = current_user.attempts
+  end
+
+  def attempts_params
+    params.require(:quiz).permit(:id)
   end
 end
