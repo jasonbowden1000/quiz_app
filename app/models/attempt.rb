@@ -6,16 +6,16 @@ class Attempt < ApplicationRecord
   accepts_nested_attributes_for :problems
 
   def status
-    finished_problems == total_problems ? "Finished" : "In Progress"
+    finished_problems.length == total_problems.length ? "Finished" : "In Progress"
   end
 
   private
 
   def finished_problems
-    problems.where(answered: true).length
+    problems.where(answered: true)
   end
 
   def total_problems
-    problems.length
+    problems
   end
 end
