@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "New Multiple-Choice Questions" do
-  MULTIPLE_CHOICE = 0
   let(:user1) { FactoryBot.create(:user) }
   let!(:deck1) { FactoryBot.create(:deck, title: "My Armors", description: "Don't leave home without them", user: user1 )}
 
@@ -13,7 +12,7 @@ RSpec.describe "New Multiple-Choice Questions" do
   def setup_question
     fill_in "Text", with: "Who's on first?"
     fill_in "Description", with: "This test will build your critical thinking ability"
-    choose "question[question_type]", option: MULTIPLE_CHOICE
+    choose "question[question_type]", option: Rails.configuration.x.question_type.MULTIPLE_CHOICE
   end
 
   before do

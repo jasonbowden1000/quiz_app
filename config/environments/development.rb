@@ -76,4 +76,9 @@ Rails.application.configure do
     g.scaffold_stylesheet false
     g.view_specs false
   end
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+  end
 end

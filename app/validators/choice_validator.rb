@@ -1,8 +1,6 @@
 class ChoiceValidator < ActiveModel::Validator
-  MULTIPLE_CHOICE = 0
-
   def validate(record) 
-    if record.question_type == MULTIPLE_CHOICE
+    if record.question_type == Rails.configuration.x.question_type.MULTIPLE_CHOICE
       true_choices = record.choices.select { |choice| choice.truth_value == true }
 
       if record.choices.size < 2

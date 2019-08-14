@@ -1,1 +1,12 @@
-%p You've reached the final stage of your testing taking journey
+.section
+  .container
+    %h4.title.is-4
+      = @problem.question.text
+    = simple_form_for([@attempt, @problem], method: :put) do |f|
+      - @problem.question.choices.each.with_index do |choice, index|
+        .content
+          %label.radio
+            %input{type: "radio", name: "problem[answer]", value: choice.id }
+            = "#{index + 1}."
+            = choice.text 
+      = f.button :submit, "Submit Answer", class: "button is-primary"

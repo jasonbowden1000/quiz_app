@@ -1,0 +1,9 @@
+.section
+  .container
+    %h3.title.is-3 Statistics
+    - @attempts.each do |attempt|
+      .content
+        %p
+          = attempt.quiz.title
+        %p
+          = attempt.status

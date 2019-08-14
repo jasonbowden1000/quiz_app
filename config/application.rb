@@ -16,5 +16,11 @@ module QuizApp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    config.x.question_type.MULTIPLE_CHOICE = 0
+    config.x.question_type.MULTIPLE_ANSWER = 1
+    config.x.question_type.TRUE_FALSE = 2
+    config.x.question_type.WRITTEN = 3
+    config.x.attempt_status.IN_PROGRESS = 0
+    config.x.attempt_status.FINISHED = 1
   end
 end

@@ -49,6 +49,7 @@ group :development, :test do
   gem 'better_errors', '~> 2.5', '>= 2.5.1'
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'faker', '~> 1.6', '>= 1.6.3'
+  gem 'bullet', '~> 5.0'
 end
 
 group :development do
