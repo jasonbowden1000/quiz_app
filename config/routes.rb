@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :attempts, path: :quiz do
-    resources :problems
+    resources :problems, param: :problem_order
   end
 
   resources :quizzes, except: [:show]

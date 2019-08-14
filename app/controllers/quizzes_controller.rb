@@ -2,7 +2,7 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:edit, :update, :destroy]
 
   def index
-    @quizzes = current_user.quizzes.includes(:quizzes_decks, :decks, :questions)
+    @quizzes = current_user.quizzes.includes(:quizzes_decks, :decks)
   end
 
   def new

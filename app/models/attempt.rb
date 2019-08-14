@@ -7,7 +7,7 @@ class Attempt < ApplicationRecord
   delegate :title, to: :quiz
 
   def first_problem
-    problems.where(order: 1).first
+    problems.where(problem_order: 1).first
   end
 
   def status
@@ -22,7 +22,7 @@ class Attempt < ApplicationRecord
 
   def populate_problems
     quiz.questions.shuffle.each.with_index(1) do |q, i|
-      problems.create(order: i, question_id: q.id)
+      problems.create(problem_order: i, question_id: q.id)
     end
   end
 end

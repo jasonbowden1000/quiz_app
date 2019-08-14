@@ -11,7 +11,11 @@ class Problem < ApplicationRecord
   end
 
   def next
-    attempt.problems.order(:order).find_by(answered: false)
+    attempt.problems.order(:problem_order).find_by(answered: false)
+  end
+
+  def to_param
+    problem_order.to_s
   end
 
   private 

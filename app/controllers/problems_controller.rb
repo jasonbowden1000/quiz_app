@@ -29,6 +29,6 @@ class ProblemsController < ApplicationController
   end
 
   def set_problem
-    @problem = Problem.find(params[:id])
+    @problem = Problem.find_by(attempt_id: params[:attempt_id], problem_order: params[:problem_order])
   end
 end

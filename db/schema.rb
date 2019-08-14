@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_143301) do
+ActiveRecord::Schema.define(version: 2019_08_14_134355) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer "status"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_143301) do
 
   create_table "problems", force: :cascade do |t|
     t.boolean "answered", default: false
-    t.integer "order"
+    t.integer "problem_order"
     t.boolean "correct"
     t.integer "attempt_id"
     t.integer "question_id"

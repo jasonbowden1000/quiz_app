@@ -6,7 +6,7 @@ class AttemptsController < ApplicationController
 
     respond_to do |format|
       if @attempt.save
-        format.html { redirect_to attempt_problem_path(@attempt, @attempt.first_problem) }
+        format.html { redirect_to attempt_problem_path(@attempt, @attempt.first_problem.problem_order) }
       else
         format.html { redirect_to quizzes_path, alert: "Could not create quiz." }
       end
