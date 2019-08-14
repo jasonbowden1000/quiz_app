@@ -8,11 +8,7 @@ class AttemptsController < ApplicationController
       if @attempt.save
         format.html { redirect_to attempt_problem_path(@attempt, @attempt.first_problem) }
       else
-        Rails.logger.info "ATTEMPT DID NOT SAVE PROPERLY"
-        # You have to go back
-        # goto quizzes page, display a notice
-        Rails.logger.info @attempt.errors
-        # format.html { render :new }
+        format.html { redirect_to quizzes_path, alert: "Could not create quiz." }
       end
     end
   end
