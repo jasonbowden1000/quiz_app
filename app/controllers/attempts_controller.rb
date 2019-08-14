@@ -6,8 +6,7 @@ class AttemptsController < ApplicationController
 
     respond_to do |format|
       if @attempt.save
-        first_problem = Problem.find_by(order: 1, attempt_id: @attempt.id)
-        format.html { redirect_to attempt_problem_path(@attempt, first_problem) }
+        format.html { redirect_to attempt_problem_path(@attempt, @attempt.first_problem) }
       else
         Rails.logger.info "ATTEMPT DID NOT SAVE PROPERLY"
         # You have to go back

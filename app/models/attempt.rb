@@ -4,8 +4,12 @@ class Attempt < ApplicationRecord
   belongs_to :quiz
   has_many :problems
 
+  def first_problem
+    problems.find { |p| p.attempt.id == id && p.order == 1 }
+  end
+
   def status
-    finished_problems.length == total_problems.length ? "Finished" : "In Progress"
+    finished_problems.length == problems.length ? "Finished" : "In Progress"
   end
 
   private
@@ -18,9 +22,5 @@ class Attempt < ApplicationRecord
     quiz.questions.shuffle.each.with_index(1) do |q, i|
       Problem.create(order: i, attempt_id: id, question_id: q.id)
     end
-  end
-
-  def total_problems
-    problems
   end
 end
