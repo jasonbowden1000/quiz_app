@@ -1,9 +1,35 @@
 .section
   .container
     %h3.title.is-3 Statistics
-    - @attempts.each do |attempt|
-      .content
-        %p
-          = attempt.title
-        %p
-          = attempt.status
+    %table.table 
+      %thead
+        %tr
+          %th
+            Quiz Name
+          %th
+            Status
+          %th
+            Score
+          %th
+            Percent
+      %tfoot
+        %tr
+          %th
+            Quiz Name
+          %th
+            Status
+          %th
+            Score
+          %th
+            Percent
+      %tbody
+        - @attempts.each do |attempt|
+          %tr
+            %td
+              = attempt.title
+            %td
+              = status(attempt.finished_problems.length, attempt.problems.length)
+            %td
+              = "#{attempt.correct_problems.length}/#{attempt.problems.length}"
+            %td
+              = "#{percent(attempt.correct_problems.length, attempt.problems.length)}%"
