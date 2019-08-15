@@ -1,7 +1,5 @@
 class ProblemsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_problem
-  before_action :set_attempt
+  before_action :authenticate_user!, :set_problem, :set_attempt
 
   def show
     redirect_to stats_path and return if @attempt.is_finished
