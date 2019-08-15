@@ -1,7 +1,7 @@
 class ChoiceValidator < ActiveModel::Validator
   def validate(record) 
     if record.question_type == Rails.configuration.x.question_type.MULTIPLE_CHOICE
-      true_choices = record.choices.select { |choice| choice.truth_value == true }
+      true_choices = record.choices.select(&:truth_value)
 
       if record.choices.size < 2
         record.errors[:base] << "Multiple choice questions should have at least two choices"

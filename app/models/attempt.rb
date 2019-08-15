@@ -7,11 +7,11 @@ class Attempt < ApplicationRecord
   delegate :title, to: :quiz
 
   def correct_problems
-    problems.select(&:correct?)
+    problems.select(&:correct)
   end
 
   def finished_problems
-    problems.select(&:answered?)
+    problems.select(&:answered)
   end
 
   def first_problem
