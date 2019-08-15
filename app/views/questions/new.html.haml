@@ -2,3 +2,6 @@
   .container
     %h3.title.is-3 Add Question
     = render "form", deck: @deck, question: @question
+.section
+  .container
+    = link_to "< Back to Decks", decks_path

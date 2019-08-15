@@ -15,7 +15,7 @@
               .content
                 = deck.description
             %footer.card-footer
-              = link_to "View", deck, class: "card-footer-item"
+              = link_to "Edit Details", edit_deck_path(deck), class: "card-footer-item"
               = link_to "Manage Questions", deck_questions_path(deck), class: "card-footer-item"
               = link_to "Delete", deck, method: :delete, data: { confirm: "Are you sure?" }, class: "card-footer-item"
       = link_to "Add Deck", new_deck_path, class: "button is-primary"

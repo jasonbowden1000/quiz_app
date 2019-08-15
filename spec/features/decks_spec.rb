@@ -10,18 +10,15 @@ RSpec.describe 'Decks' do
     @deck_description = "Deck Description"
   end
 
-  context "created by users" do
-    it "should be visible on a user's decks page" do
+  context "when created by users" do
+    it "should send the user to the add question form" do
       click_link "Manage Decks"
       click_link "Add Deck"
       fill_in "Title", with: @deck_title
       fill_in "Description", with: @deck_description
       click_button "Create Deck"
-      click_link "All Decks"
 
-      expect(page.first("h2").text).to eql("Your Decks")
-      expect(page).to have_content @deck_title
-      expect(page).to have_content @deck_description
+      expect(page.first("h3").text).to eql("Add Question")
     end
   end 
 
@@ -32,13 +29,7 @@ RSpec.describe 'Decks' do
     let!(:deck2) { FactoryBot.create(:deck, id: 456, title: "Rogues Gallery", description: "baddies", user: user2 )}
 
     it "should not visible to the current user" do
-      click_link "Manage Decks"
-      click_link "Add Deck"
-      fill_in "Title", with: @deck_title
-      fill_in "Description", with: @deck_description
-      click_button "Create Deck"
-      click_link "All Decks"
-
+      visit decks_path
       expect(page).not_to have_content deck1.title
       expect(page).not_to have_content deck2.title
     end
