@@ -1,18 +1,19 @@
 class ProblemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_problem
+  before_action :set_attempt
 
   def show
-    redirect_to attempt_problem_path(@problem.attempt, @problem.next) if @problem.next.id != @problem.id
+    redirect_to stats_path and return if @attempt.is_finished
+    redirect_to attempt_problem_path(@attempt, @problem.succedent) unless @problem.current?
   end
 
   def update
     respond_to do |format|
       if @problem.update(problem_params)
-        path = @problem.next ? attempt_problem_path(@problem.attempt, @problem.next) : stats_path
+        path = @problem.succedent ? attempt_problem_path(@attempt, @problem.succedent) : stats_path
         format.html { redirect_to path  }
       else
-        @attempt = @problem.attempt
         format.html { render :show }
       end
     end
@@ -20,6 +21,10 @@ class ProblemsController < ApplicationController
 
   def problem_params
     params.require(:problem).permit(:submitted_answer)
+  end
+
+  def set_attempt
+    @attempt = @problem.attempt
   end
 
   def set_problem

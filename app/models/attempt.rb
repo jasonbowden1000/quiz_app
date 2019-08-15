@@ -7,15 +7,19 @@ class Attempt < ApplicationRecord
   delegate :title, to: :quiz
 
   def correct_problems
-    problems.select(&:correct)
+    problems.correct
   end
 
   def finished_problems
-    problems.select(&:answered)
+    problems.finished
+  end
+
+  def is_finished
+    finished_problems.length == problems.length
   end
 
   def first_problem
-    problems.where(problem_order: 1).first
+    problems.find_first
   end
 
   private
