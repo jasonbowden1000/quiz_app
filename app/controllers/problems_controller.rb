@@ -3,8 +3,7 @@ class ProblemsController < ApplicationController
   before_action :set_problem
 
   def show
-    @attempt = Attempt.find(params[:attempt_id])
-    # Bounce the user if problem is not current problem
+    redirect_to attempt_problem_path(@problem.attempt, @problem.next) if @problem.next.id != @problem.id
   end
 
   def update
