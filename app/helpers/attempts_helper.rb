@@ -1,6 +1,6 @@
 module AttemptsHelper
   def percent(n, d)
-    (n.to_f * 100 / d).round
+    d.nonzero? ? (n.to_f * 100 / d).round : 0
   end
   
   def status(finished, all)

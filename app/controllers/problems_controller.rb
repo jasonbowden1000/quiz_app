@@ -8,24 +8,19 @@ class ProblemsController < ApplicationController
   end
 
   def update
-    is_correct = @problem.correct_choice.id == problem_params[:answer].to_i
-
-    # we should also check for a submission, that is, problem_params[:answer] should have a value
-    # something like rescue from ActionController::ParameterMissing
     respond_to do |format|
-      if @problem.update({answered: true, correct: is_correct })
-        next_problem = @problem.next
-        path = next_problem ? attempt_problem_path(@problem.attempt, next_problem) : attempts_path
+      if @problem.update(problem_params)
+        path = @problem.next ? attempt_problem_path(@problem.attempt, @problem.next) : stats_path
         format.html { redirect_to path  }
       else
-        Rails.logger.info "Something went wrong"
-        # format.html { render :edit }
+        @attempt = @problem.attempt
+        format.html { render :show }
       end
     end
  end
 
   def problem_params
-    params.require(:problem).permit(:answer)
+    params.require(:problem).permit(:submitted_answer)
   end
 
   def set_problem

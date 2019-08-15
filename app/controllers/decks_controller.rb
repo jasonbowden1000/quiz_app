@@ -51,12 +51,10 @@ class DecksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_deck
       @deck = current_user.decks.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def deck_params
       params.require(:deck).permit(:title, :description, questions: [])
     end

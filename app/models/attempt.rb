@@ -22,7 +22,7 @@ class Attempt < ApplicationRecord
 
   def populate_problems
     quiz.questions.shuffle.each.with_index(1) do |q, i|
-      problems.create(problem_order: i, question_id: q.id)
+      problems.build(problem_order: i, question_id: q.id)
     end
   end
 end
