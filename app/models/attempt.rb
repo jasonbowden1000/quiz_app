@@ -19,7 +19,7 @@ class Attempt < ApplicationRecord
   end
 
   def first_problem
-    problems.find_first
+    problems.first_problem
   end
 
   private

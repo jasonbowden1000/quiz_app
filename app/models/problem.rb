@@ -11,7 +11,7 @@ class Problem < ApplicationRecord
   scope :correct, -> { where(correct: true) }
   scope :finished, -> { where(answered: true) }
 
-  def self.find_first
+  def self.first_problem
     where(problem_order: 1).first
   end
 
