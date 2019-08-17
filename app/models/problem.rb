@@ -15,14 +15,6 @@ class Problem < ApplicationRecord
     where(problem_order: 1).first
   end
 
-  def correct_choice
-    if question_type == Rails.configuration.x.question_type.MULTIPLE_CHOICE
-      correct_choice = question.choices.find { |c| c.truth_value }
-    end
-
-    correct_choice
-  end
-
   def current?
     succedent && succedent.id == id
   end
@@ -37,13 +29,21 @@ class Problem < ApplicationRecord
 
   private 
 
-  def question_type
-    question.question_type
+  def correct_choice
+    if question_type == Rails.configuration.x.question_type.MULTIPLE_CHOICE
+      correct_choice = question.choices.find(&:truth_value)
+    end
+
+    correct_choice
   end
 
   def prepare_update
     self.correct = correct_choice.id == submitted_answer.to_i
     self.answered = true
+  end
+
+  def question_type
+    question.question_type
   end
 
   def validate_submitted_answer

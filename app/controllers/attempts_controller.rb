@@ -6,7 +6,7 @@ class AttemptsController < ApplicationController
 
     respond_to do |format|
       if @attempt.save
-        format.html { redirect_to attempt_problem_path(@attempt, @attempt.first_problem.problem_order) }
+        format.html { redirect_to attempt_problem_path(@attempt, @attempt.first_problem) }
       else
         format.html { redirect_to quizzes_path, alert: "Could not create quiz." }
       end
@@ -18,6 +18,7 @@ class AttemptsController < ApplicationController
   end
 
   def attempts_params
+    # params.require(:quiz).permit(:id)
     params.require(:quiz).permit(:id)
   end
 end
