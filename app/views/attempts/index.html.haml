@@ -4,27 +4,19 @@
     %table.table 
       %thead
         %tr
-          %th
-            Quiz Name
-          %th
-            Status
-          %th
-            Score
-          %th
-            Percent
+          %th Quiz Name
+          %th Status
+          %th Score
+          %th Percent
       %tfoot
         %tr
-          %th
-            Quiz Name
-          %th
-            Status
-          %th
-            Score
-          %th
-            Percent
+          %th Quiz Name
+          %th Status
+          %th Score
+          %th Percent
       %tbody
         - @attempts.each do |attempt|
-          %tr
+          %tr{id: "attempt_#{attempt.id}"}
             %td
               = attempt.title
             %td

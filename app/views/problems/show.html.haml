@@ -4,11 +4,6 @@
       = @problem.question.text
     = simple_form_for([@attempt, @problem], method: :put) do |f|
       = f.error_notification class: "error", message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-      = f.input :submitted_answer, as: :hidden, input_html: { value: "" }, wrapper: false
       - @problem.choices.each.with_index do |choice, index|
-        .content
-          %label.radio
-            %input{type: "radio", name: "problem[submitted_answer]", value: choice.id, id: "choice_#{index + 1}" }
-            = "#{index + 1}."
-            = choice.text 
+        = render Rails.configuration.x.question_type.key(@problem.question_type).to_s.downcase, index: index, choice: choice
       = f.button :submit, "Submit Answer", class: "button is-primary"

@@ -1,0 +1,5 @@
+.content
+  %label.radio
+    %input{type: "radio", name: "problem[submitted_answer][]", value: choice.id, id: "choice_#{index + 1}" }
+    = "#{index + 1}."
+    = choice.text 

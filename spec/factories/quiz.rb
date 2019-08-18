@@ -20,5 +20,11 @@ FactoryBot.define do
         create_list(:deck, evaluator.decks_count, quizzes: [quiz])
       end
     end
+
+    factory :multiple_answer_quiz do
+      after(:create) do |quiz, evaluator|
+        create_list(:multiple_answer_deck, evaluator.decks_count, quizzes: [quiz] )
+      end
+    end
   end
 end

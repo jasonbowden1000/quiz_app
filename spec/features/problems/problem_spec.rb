@@ -3,16 +3,18 @@ require "rails_helper"
 RSpec.describe "Problems" do
 
   let!(:user1) { FactoryBot.create(:user) }
-  let!(:quiz1) { FactoryBot.create(:quiz_with_decks, user: user1) }
+  let!(:quiz1) { FactoryBot.create(:quiz_with_decks, decks_count: 1, user: user1) }
+
+  before do
+    login_as(user1)
+    visit quizzes_path
+    within("div#quiz_#{quiz1.id}") do
+      click_button "Take Quiz"
+    end
+  end
 
   context "without a selection" do
     it "should notify the user" do
-      login_as(user1)
-      visit quizzes_path
-      within("div#quiz_#{quiz1.id}") do
-        click_button "Take Quiz"
-      end
-
       click_button "Submit Answer"
 
       expect(page).to have_content "Please make a selection"
@@ -22,13 +24,6 @@ RSpec.describe "Problems" do
   describe "when viewed" do
     context "out of order" do
       it "should redirect to the first untaken question" do
-        login_as(user1)
-        visit quizzes_path
-
-        within("div#quiz_#{quiz1.id}") do
-          click_button "Take Quiz"
-        end
-
         path_for_problem1 = current_path
         path_parts = current_path.split("/")
         path_parts.pop()
@@ -41,13 +36,6 @@ RSpec.describe "Problems" do
 
     context "when the quiz is finished" do
       it "should redirect to the stats page" do
-        login_as(user1)
-        visit quizzes_path
-
-        within("div#quiz_#{quiz1.id}") do
-          click_button "Take Quiz"
-        end
-
         path_for_problem1 = current_path
 
         quiz1.questions.length.times do

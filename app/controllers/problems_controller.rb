@@ -18,7 +18,7 @@ class ProblemsController < ApplicationController
  end
 
   def problem_params
-    params.require(:problem).permit(:submitted_answer)
+    params[:problem].present? ? params.require(:problem).permit(submitted_answer: []) : {submitted_answer: []}
   end
 
   def set_attempt

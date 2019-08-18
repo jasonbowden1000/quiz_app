@@ -10,4 +10,8 @@ class Question < ApplicationRecord
 
   include ActiveModel::Validations
   validates_with ChoiceValidator
+
+  def correct_choices
+    choices.correct
+  end
 end

@@ -18,7 +18,6 @@ class AttemptsController < ApplicationController
   end
 
   def attempts_params
-    # params.require(:quiz).permit(:id)
     params.require(:quiz).permit(:id)
   end
 end

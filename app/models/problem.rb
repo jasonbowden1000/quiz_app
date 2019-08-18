@@ -27,23 +27,19 @@ class Problem < ApplicationRecord
     problem_order.to_s
   end
 
+  def question_type
+    question.question_type
+  end
+
   private 
 
-  def correct_choice
-    if question_type == Rails.configuration.x.question_type.MULTIPLE_CHOICE
-      correct_choice = question.choices.find(&:truth_value)
-    end
-
-    correct_choice
+  def correct_choices
+    question.correct_choices.map(&:id)
   end
 
   def prepare_update
-    self.correct = correct_choice.id == submitted_answer.to_i
+    self.correct = correct_choices.sort == submitted_answer.map(&:to_i).sort
     self.answered = true
-  end
-
-  def question_type
-    question.question_type
   end
 
   def validate_submitted_answer
