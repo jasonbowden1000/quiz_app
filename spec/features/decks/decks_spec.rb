@@ -23,7 +23,6 @@ RSpec.describe 'Decks' do
   end 
 
   context "created by other users" do
-
     let!(:user2) { FactoryBot.create(:user, first_name: "Tony", last_name: "Stark", email: "ironman456@gmail.com" )}
     let!(:deck1) { FactoryBot.create(:deck, id: 123, title: "My Armors", description: "Don't leave home without them", user: user2 )}
     let!(:deck2) { FactoryBot.create(:deck, id: 456, title: "Rogues Gallery", description: "baddies", user: user2 )}

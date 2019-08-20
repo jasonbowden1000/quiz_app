@@ -17,7 +17,7 @@
               .content
                 - if quiz.decks.any?
                   Decks:
-                  = safe_join(quiz.decks.map { |d| link_to d.title, deck_path(d)  }, ", ".html_safe)
+                  = safe_join(quiz.decks.map { |d| link_to d.title, deck_questions_path(d)  }, ", ".html_safe)
                 - else
                   This quiz has no decks.
                   = link_to "Add a deck!", edit_quiz_path(quiz)

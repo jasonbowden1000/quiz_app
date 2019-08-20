@@ -1,5 +1,11 @@
 .section
   .container
     %h3.title.is-3 New quiz
-    = render 'form'
-    = link_to 'Back', quizzes_path
+    - if current_user.decks.any?
+      = render 'form'
+    - else
+      .content
+        = "You have no decks. Create a deck first ".html_safe +  link_to("here", decks_path) + ".".html_safe
+      .content
+    .content
+      = link_to 'Back', quizzes_path
