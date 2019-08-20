@@ -7,6 +7,8 @@ document.addEventListener('turbolinks:load', function() {
     const addChoiceButton = document.getElementById('add_choice');
     let count = 0;
     addChoiceButton.addEventListener('click', addChoiceToForm);
+    closeField = newQuestionForm.querySelector('.close');
+    closeField.addEventListener('click', removeField);
 
     function addChoiceToForm() {
       ++count;
@@ -17,15 +19,32 @@ document.addEventListener('turbolinks:load', function() {
       newControl.classList.add('control');
 
       let newLabel = document.createElement('label');
-      newLabel.classList.add('label');
+      newLabel.classList.add('label', 'choice_label');
       let newLabelText = document.createTextNode("Choice " + (count + 1) + ":");
       newLabel.appendChild(newLabelText);
 
-      let newTextInput = document.createElement('input');
-      newTextInput.setAttribute('type', 'text');
-      newTextInput.classList.add('input');
-      newTextInput.id = "choice_text_" + count;
-      newTextInput.name = 'question[choices_attributes][' + count + '][text]';
+      let newTextInput = document.createElement('div');
+      newTextInput.classList.add('columns', 'is-mobile')
+      let newTextInputInner = document.createElement('div');
+      newTextInputInner.classList.add('column', 'is-11-table', 'is-10-mobile');
+      let textInput = document.createElement('input');
+      textInput.setAttribute('type', 'text');
+      textInput.classList.add('input');
+      textInput.id = "choice_text_" + count;
+      textInput.name = 'question[choices_attributes][' + count + '][text]';
+      newTextInputInner.appendChild(textInput);
+      newTextInput.appendChild(newTextInputInner);
+
+      let closeWrapper = document.createElement('div');
+      closeWrapper.classList.add('column', 'is-1-tablet', 'is-2-mobile');
+      let closeWrapperInner = document.createElement('div');
+      closeWrapperInner.classList.add('close');
+      let closeText = document.createTextNode('X');
+      closeWrapperInner.appendChild(closeText);
+      closeWrapperInner.addEventListener('click', removeField);
+      closeWrapper.appendChild(closeWrapperInner);
+      newTextInput.appendChild(closeWrapper);
+
 
       let newRadioInputTrueLabel = document.createElement('label');
       newRadioInputTrueLabel.classList.add('radio');
@@ -56,6 +75,17 @@ document.addEventListener('turbolinks:load', function() {
       newField.appendChild(newControl);
 
       newQuestionForm.insertBefore(newField, addChoiceButton);
+    }
+
+    function removeField(e) {
+      let fieldToRemove = e.srcElement.closest('.field');
+      fieldToRemove.parentNode.removeChild(fieldToRemove);
+      updateLabels();
+    }
+
+    function updateLabels() {
+      let choiceLabels = newQuestionForm.querySelectorAll('.choice_label');
+      choiceLabels.forEach((label, i) => label.textContent = `Choice ${i + 1}:`);
     }
   }
 });

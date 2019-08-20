@@ -1,3 +1,21 @@
 // Place all the styles related to the questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bulma";
+.close {
+  background: $danger;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  height: 2.25em;
+  line-height: 2.25em;
+  text-align: center;
+  width: 2.25em;
+
+  &:hover {
+    background: darken( $danger, 15% )
+  }
+}

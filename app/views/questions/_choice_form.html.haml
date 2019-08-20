@@ -1,9 +1,13 @@
 .field.choice
   .control
-    %label.label 
+    %label.label.choice_label
       = "Choice #{index + 1}:"
-    %input{class: "input", required: true, type: "text", name: "question[choices_attributes][#{index}][text]", |
-      value: choice_text, id: "choice_text_#{index}"  }
+    .columns.is-mobile
+      .column.is-11-table.is-10-mobile
+        %input{class: "input", required: true, type: "text", name: "question[choices_attributes][#{index}][text]", |
+          value: choice_text, id: "choice_text_#{index}"  }
+      .column.is-1-tablet.is-2-mobile
+        .close X
     %label.radio
       %input{type: "radio", name: "question[choices_attributes][#{index}][truth_value]", value: "true", |
         id: "choice_true_#{index}", checked: choice_truth_value == true || nil }
