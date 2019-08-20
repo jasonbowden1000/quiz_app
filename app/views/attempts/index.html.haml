@@ -18,9 +18,12 @@
         - @attempts.each do |attempt|
           %tr{id: "attempt_#{attempt.id}"}
             %td
-              = attempt.title
+              - if attempt.is_finished
+                = attempt.title
+              - else
+                = link_to(attempt.title, attempt_problem_path(attempt, attempt.finished_problems.length + 1))
             %td
-              = status(attempt.finished_problems.length, attempt.problems.length)
+              = status(attempt.is_finished)
             %td
               = "#{attempt.correct_problems.length}/#{attempt.finished_problems.length}"
             %td

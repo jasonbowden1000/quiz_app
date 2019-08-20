@@ -3,7 +3,7 @@ module AttemptsHelper
     d.nonzero? ? (n.to_f * 100 / d).round : 0
   end
   
-  def status(finished, all)
-    finished == all ? "Finished" : "In Progress"
+  def status(is_finished)
+    is_finished ? "Finished" : "In Progress"
   end
 end
