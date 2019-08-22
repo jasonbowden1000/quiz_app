@@ -3,7 +3,7 @@ class DecksController < ApplicationController
   before_action :set_deck, only: [:edit, :update, :destroy]
 
   def index
-    @decks = current_user.decks
+    @decks = current_user.active_decks
   end
 
   def new
@@ -36,7 +36,7 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    @deck.destroy
+    @deck.soft_delete
     respond_to do |format|
       format.html { redirect_to decks_url, notice: 'Deck was successfully destroyed.' }
     end

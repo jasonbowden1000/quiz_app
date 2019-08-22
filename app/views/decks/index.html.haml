@@ -3,7 +3,7 @@
     %h2.title.is-2 Your Decks
     - if @decks.any?
       - @decks.each do |deck|
-        .content{id: "deck_#{deck.id}"}
+        .content{id: "deck_#{deck.id}", class: "deck"}
           .card
             %header.card-header
               %p.card-header-title

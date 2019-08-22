@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_22_132323) do
+ActiveRecord::Schema.define(version: 2019_08_22_153138) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer "status"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_132323) do
     t.integer "user_id"
     t.string "title"
     t.text "description"
+    t.boolean "active", default: true
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 

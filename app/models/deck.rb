@@ -5,4 +5,10 @@ class Deck < ApplicationRecord
   validates :user, presence: true
   validates :title, presence: true
   validates :description, presence: true
+
+  scope :active, -> { where(active: true) }
+
+  def soft_delete
+    update(active: false)
+  end
 end

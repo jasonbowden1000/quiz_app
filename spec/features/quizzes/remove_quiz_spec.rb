@@ -3,10 +3,13 @@ require "rails_helper"
 RSpec.describe "Quizzes" do
   let!(:user1) { FactoryBot.create(:user_with_quizzes, quizzes_count: 3 )}
 
-  context "when deleted" do
+  before do
+    login_as(user1)
+    visit quizzes_path
+  end
+
+  context "when removed" do
     it "should no longer be visible on a user's quizzes page", js: true do
-      login_as(user1)
-      visit quizzes_path
       quizzes = page.all("div.quiz");
       within quizzes.first do
         page.accept_confirm do
@@ -18,8 +21,6 @@ RSpec.describe "Quizzes" do
     end
 
     it "should not impact existing quiz attempts", js: true do
-      login_as(user1)
-      visit quizzes_path
       quiz = first("div.quiz")
       title = quiz.first('p.card-header-title').text
       within quiz do

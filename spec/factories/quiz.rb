@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :quiz do
     sequence(:id) { |n| n }
-    title { "Software Languages" }
-    description { "Stay sharp" }
+    title { Faker::Company.unique.name }
+    description { Faker::Lorem.unique.sentences(3) }
     user
 
     transient do

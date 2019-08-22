@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :quizzes
   has_many :attempts
 
+  def active_decks
+    decks.active
+  end
+
   def active_quizzes
     quizzes.active
   end
