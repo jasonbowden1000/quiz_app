@@ -2,7 +2,7 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:edit, :update, :destroy]
 
   def index
-    @quizzes = current_user.quizzes.includes(:quizzes_decks, :decks)
+    @quizzes = current_user.active_quizzes.includes(:quizzes_decks, :decks)
   end
 
   def new
@@ -30,19 +30,16 @@ class QuizzesController < ApplicationController
     respond_to do |format|
       if @quiz.update(quiz_params)
         format.html { redirect_to quizzes_path, notice: 'Quiz was successfully updated.' }
-        format.json { render :show, status: :ok, location: @quiz } # ?
       else
         format.html { render :edit }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @quiz.destroy
+    @quiz.soft_delete
     respond_to do |format|
       format.html { redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

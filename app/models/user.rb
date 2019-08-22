@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :decks
   has_many :quizzes
   has_many :attempts
+
+  def active_quizzes
+    quizzes.active
+  end
 end

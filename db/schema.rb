@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_134355) do
+ActiveRecord::Schema.define(version: 2019_08_22_132323) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer "status"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_134355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.boolean "active", default: true
     t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
