@@ -25,6 +25,6 @@
             %td
               = status(attempt.is_finished)
             %td
-              = "#{attempt.correct_problems.length}/#{attempt.finished_problems.length}"
+              = "#{attempt.correct_problems.length}/#{attempt.finished_problems.length}" if attempt.is_finished
             %td
-              = "#{percent(attempt.correct_problems.length, attempt.finished_problems.length)}%"
+              = "#{percent(attempt.correct_problems.length, attempt.finished_problems.length)}%" if attempt.is_finished
