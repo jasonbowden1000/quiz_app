@@ -1,6 +1,8 @@
 .section
   .container 
     %h3.title.is-3 Deck Questions
+    %h4.title.is-4
+      = "Deck: #{@deck.title}"
 - if @deck.questions.any?
   .section
     .container

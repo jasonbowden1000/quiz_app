@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :deck do
-    title { Faker::Lorem.unique.words(4) }
-    description { Faker::Lorem.unique.sentences(3) }
+    title { Faker::Lorem.unique.sentence(4) }
+    description { Faker::Lorem.unique.paragraph(3) }
     user
 
     transient do

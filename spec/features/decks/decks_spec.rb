@@ -6,8 +6,8 @@ RSpec.describe 'Decks' do
   before do
     login_as(user1)
     visit "/"
-    @deck_title = "Deck Title"
-    @deck_description = "Deck Description"
+    @deck_title = Faker::Lorem.unique.sentence(4)
+    @deck_description = Faker::Lorem.unique.paragraph(4)
   end
 
   context "when created by users" do
@@ -18,7 +18,9 @@ RSpec.describe 'Decks' do
       fill_in "Description", with: @deck_description
       click_button "Create Deck"
 
+
       expect(page.first("h3").text).to eql("Add Question")
+      expect(page.first("h4")).to have_content(@deck_title)
     end
   end 
 
