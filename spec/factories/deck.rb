@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :deck do
-    sequence(:title) { |n| "Deck #{n}" }
-    description { "Don't forget the broader concepts." }
+    title { Faker::Lorem.unique.words(4) }
+    description { Faker::Lorem.unique.sentences(3) }
     user
 
     transient do

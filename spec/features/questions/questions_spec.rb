@@ -59,4 +59,10 @@ RSpec.describe "New Multiple-Choice Questions" do
       expect(page).to have_content "Description can't be blank"
     end
   end
+
+  context "when initially viewed" do
+    it "should display the deck name" do
+      expect(page).to have_content deck1.title
+    end
+  end
 end

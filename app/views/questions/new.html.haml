@@ -1,6 +1,8 @@
 .section
   .container
     %h3.title.is-3 Add Question
+    %h4.title.is-4
+      = "Deck: #{@deck.title}"
     = render "form", deck: @deck, question: @question
 .section
   .container
