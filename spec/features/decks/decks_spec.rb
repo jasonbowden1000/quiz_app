@@ -19,7 +19,7 @@ RSpec.describe 'Decks' do
       click_button "Create Deck"
 
 
-      expect(page.first("h3").text).to eql("Add Question")
+      expect(page.first("h2").text).to eql("Add Question")
       expect(page.first("h4")).to have_content(@deck_title)
     end
   end 
