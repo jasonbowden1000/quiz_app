@@ -18,6 +18,14 @@
 @import "font_awesome5_webfont";
 @import "palette";
 
+.card-header {
+  background-color: $secondary-darkest;
+}
+
+.card-header-title {
+  color: $primary-lightest;
+}
+
 .content p:not(:last-child),
 .notification:not(:last-child) {
   margin-bottom: 0;
