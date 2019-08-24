@@ -35,6 +35,10 @@
   color: $danger;
 }
 
+.highlighted {
+  color: $highlighted;
+}
+
 .link-button {
   background: none;
   border: none;
@@ -67,6 +71,10 @@
     color: $secondary-darkest;
     background-color: $tertiary-lightest;
   }
+}
+
+.site-icon {
+  margin-right: .5em;
 }
 
 textarea.input {
