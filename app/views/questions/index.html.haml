@@ -1,7 +1,7 @@
+- content_for :main_heading do
+  = "Add Question"
 .section
   .container 
-    - content_for :main_heading do
-      = "Add Question"
     %h4.title.is-4
       = "Deck: #{@deck.title}"
 - if @deck.questions.any?

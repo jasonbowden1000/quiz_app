@@ -1,7 +1,7 @@
+- content_for :main_heading do
+  = "Your Quizzes"
 .section
   .container
-    - content_for :main_heading do
-      = "Your Quizzes"
     - if @quizzes.any?
       - @quizzes.each do |quiz|
         .content.quiz{id: "quiz_#{quiz.id}"}

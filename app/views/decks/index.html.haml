@@ -1,7 +1,7 @@
+- content_for :main_heading do
+  = "Your Decks"
 .section
   .container
-    - content_for :main_heading do
-      = "Your Decks"
     - if @decks.any?
       - @decks.each do |deck|
         .content{id: "deck_#{deck.id}", class: "deck"}
