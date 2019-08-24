@@ -16,8 +16,7 @@
 @import "bulma";
 @import "bulma-extensions";
 @import "font_awesome5_webfont";
-
-$secondary: #ffa400;
+@import "palette";
 
 .content p:not(:last-child),
 .notification:not(:last-child) {
@@ -28,14 +27,6 @@ $secondary: #ffa400;
   color: $danger;
 }
 
-.main-heading {
-  padding: 1.5rem 1.5rem;
-}
-
-.is-secondary {
-  background-color: $secondary;
-}
-
 .link-button {
   background: none;
   border: none;
@@ -43,6 +34,31 @@ $secondary: #ffa400;
   cursor: pointer;
   font-size: 1em;
   width: 100%;
+}
+
+.main-heading {
+  background-color: $secondary-lightest;
+}
+
+.main-heading-section {
+  padding: 1.5rem 1.5rem;
+}
+
+.menu-label {
+  color: $primary-darkest;
+  font-weight: bold;
+}
+
+.menu-list a {
+  color: $tertiary-light;
+  font-weight: bold;
+  background-color: $secondary;
+  margin-bottom: 1px;
+
+  &:hover {
+    color: $secondary-darkest;
+    background-color: $tertiary-lightest;
+  }
 }
 
 textarea.input {
