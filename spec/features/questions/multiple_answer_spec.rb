@@ -4,11 +4,6 @@ RSpec.describe "New Multiple-Answer questions" do
   let(:user1) { FactoryBot.create(:user) }
   let!(:deck1) { FactoryBot.create(:deck, user: user1 )}
 
-  def fill_in_choice(index:, text:, truth_value:)
-    fill_in "choice_text_#{index}", with: text
-    choose "choice_#{truth_value}_#{index}", option: truth_value
-  end
-
   before do
     login_as(user1)
     visit decks_path

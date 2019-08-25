@@ -1,13 +1,8 @@
 require "rails_helper"
 
-RSpec.describe "New Multiple-Choice Questions" do
+RSpec.describe "New True-False Questions" do
   let(:user1) { FactoryBot.create(:user) }
   let!(:deck1) { FactoryBot.create(:deck, user: user1 )}
-
-  def fill_in_choice(index:, text:, truth_value:)
-    fill_in "choice_text_#{index}", with: text
-    choose "choice_#{truth_value}_#{index}", option: truth_value
-  end
 
   def setup_question
     fill_in "Text", with: "Who's on first?"
