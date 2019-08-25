@@ -6,11 +6,11 @@
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+  %body.is-flex.has-direction-column.is-viewport-height
     = render '/layouts/notifications'
     = render '/layouts/navbar'
     = render '/layouts/header'
-    .columns
+    .columns.is-fullheight
       = render '/layouts/sidebar'
       .column
         = yield

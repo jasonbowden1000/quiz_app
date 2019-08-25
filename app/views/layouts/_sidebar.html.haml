@@ -1,12 +1,12 @@
-.column.is-2
+.column.is-2.sidebar
   .section
     .container
       %aside.menu
-        %p.menu-label General
+        %p.menu-label.has-text-centered Menu
         %ul.menu-list
           %li
-            = link_to "Decks", decks_path
+            = link_to "Decks", decks_path, class: "has-text-centered"
           %li
-            = link_to "Quizzes", quizzes_path
+            = link_to "Quizzes", quizzes_path, class: "has-text-centered"
           %li
-            = link_to "Statistics", stats_path
+            = link_to "Statistics", stats_path, class: "has-text-centered"

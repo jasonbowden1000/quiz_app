@@ -35,8 +35,24 @@
   color: $danger;
 }
 
+.has-direction-column {
+  flex-direction: column;
+}
+
 .highlighted {
   color: $highlighted;
+}
+
+.is-fullheight {
+  flex: 1;
+
+  .column {
+    overflow-y: auto;
+  }
+}
+
+.is-viewport-height {
+  height: 100vh;
 }
 
 .link-button {
@@ -72,6 +88,11 @@
     background-color: $tertiary-lightest;
   }
 }
+
+.sidebar {
+  background-color: $primary-lightest;
+}
+
 
 .site-icon {
   margin-right: .5em;
