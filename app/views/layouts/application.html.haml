@@ -11,7 +11,8 @@
     = render '/layouts/navbar'
     = render '/layouts/header'
     .columns.is-fullheight
-      = render '/layouts/sidebar'
+      - if user_signed_in?
+        = render '/layouts/sidebar'
       .column
         = yield
 
