@@ -7,8 +7,8 @@ document.addEventListener('turbolinks:load', function() {
     const addChoiceButton = document.getElementById('add_choice');
     let count = 0;
     addChoiceButton.addEventListener('click', addChoiceToForm);
-    closeField = newQuestionForm.querySelector('.close');
-    closeField.addEventListener('click', removeField);
+
+    initializeChoices();
 
     function addChoiceToForm() {
       ++count;
@@ -75,6 +75,14 @@ document.addEventListener('turbolinks:load', function() {
       newField.appendChild(newControl);
 
       newQuestionForm.insertBefore(newField, addChoiceButton);
+    }
+
+    function initializeChoices() {
+      const choices = Array.from(document.getElementsByClassName('choice'));
+      choices.forEach(choice => {
+        let closeField = choice.querySelector('.close');
+        closeField.addEventListener('click', removeField);
+      });
     }
 
     function removeField(e) {
