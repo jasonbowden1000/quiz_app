@@ -12,6 +12,7 @@ document.addEventListener('turbolinks:load', function() {
 
     function addChoiceToForm() {
       ++count;
+      let total = newQuestionForm.findElementsByClassName('choices');
       let newField = document.createElement('div')
       newField.classList.add('field');
 
@@ -20,7 +21,7 @@ document.addEventListener('turbolinks:load', function() {
 
       let newLabel = document.createElement('label');
       newLabel.classList.add('label', 'choice_label');
-      let newLabelText = document.createTextNode("Choice " + (count + 1) + ":");
+      let newLabelText = document.createTextNode("Choice " + (total + 1) + ":");
       newLabel.appendChild(newLabelText);
 
       let newTextInput = document.createElement('div');
@@ -78,7 +79,7 @@ document.addEventListener('turbolinks:load', function() {
     }
 
     function initializeChoices() {
-      const choices = Array.from(document.getElementsByClassName('choice'));
+      const choices = Array.from(newQuestionForm.getElementsByClassName('choice'));
       choices.forEach(choice => {
         let closeField = choice.querySelector('.close');
         closeField.addEventListener('click', removeField);
@@ -88,6 +89,7 @@ document.addEventListener('turbolinks:load', function() {
     function removeField(e) {
       let fieldToRemove = e.srcElement.closest('.field');
       fieldToRemove.parentNode.removeChild(fieldToRemove);
+
       updateLabels();
     }
 
