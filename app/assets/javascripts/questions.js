@@ -5,23 +5,26 @@ document.addEventListener('turbolinks:load', function() {
 
   if (newQuestionForm) {
     const addChoiceButton = document.getElementById('add_choice');
-    let count = 0;
+    let choices = Array.from(newQuestionForm.getElementsByClassName('choice'));
+    let total = choices.length;
+    let index = choices.slice(-1)[0].querySelector('[data-key]').getAttribute('data-key');
+
     addChoiceButton.addEventListener('click', addChoiceToForm);
 
     initializeChoices();
 
     function addChoiceToForm() {
-      ++count;
-      let total = newQuestionForm.findElementsByClassName('choices');
+      ++total;
+      ++index;
       let newField = document.createElement('div')
-      newField.classList.add('field');
+      newField.classList.add('field', 'choice');
 
       let newControl = document.createElement('div');
       newControl.classList.add('control');
 
       let newLabel = document.createElement('label');
       newLabel.classList.add('label', 'choice_label');
-      let newLabelText = document.createTextNode("Choice " + (total + 1) + ":");
+      let newLabelText = document.createTextNode("Choice " + total + ":");
       newLabel.appendChild(newLabelText);
 
       let newTextInput = document.createElement('div');
@@ -30,9 +33,10 @@ document.addEventListener('turbolinks:load', function() {
       newTextInputInner.classList.add('column', 'is-11-table', 'is-10-mobile');
       let textInput = document.createElement('input');
       textInput.setAttribute('type', 'text');
+      textInput.setAttribute('data-key', index);
       textInput.classList.add('input');
-      textInput.id = "choice_text_" + count;
-      textInput.name = 'question[choices_attributes][' + count + '][text]';
+      textInput.id = "choice_text_" + index;
+      textInput.name = 'question[choices_attributes][' + index + '][text]';
       newTextInputInner.appendChild(textInput);
       newTextInput.appendChild(newTextInputInner);
 
@@ -46,14 +50,13 @@ document.addEventListener('turbolinks:load', function() {
       closeWrapper.appendChild(closeWrapperInner);
       newTextInput.appendChild(closeWrapper);
 
-
       let newRadioInputTrueLabel = document.createElement('label');
       newRadioInputTrueLabel.classList.add('radio');
       let newRadioInputTrue = document.createElement('input');
       newRadioInputTrue.setAttribute('type', 'radio');
       newRadioInputTrue.setAttribute('value', 'true');
-      newRadioInputTrue.name = 'question[choices_attributes][' + count + '][truth_value]';
-      newRadioInputTrue.id = "choice_true_" + count;
+      newRadioInputTrue.name = 'question[choices_attributes][' + index + '][truth_value]';
+      newRadioInputTrue.id = "choice_true_" + index;
       newRadioInputTrueText = document.createTextNode(' True');
       newRadioInputTrueLabel.appendChild(newRadioInputTrue);
       newRadioInputTrueLabel.appendChild(newRadioInputTrueText);
@@ -63,8 +66,8 @@ document.addEventListener('turbolinks:load', function() {
       let newRadioInputFalse = document.createElement('input');
       newRadioInputFalse.setAttribute('type', 'radio');
       newRadioInputFalse.setAttribute('value', 'false');
-      newRadioInputFalse.name = 'question[choices_attributes][' + count + '][truth_value]';
-      newRadioInputFalse.id = "choice_false_" + count;
+      newRadioInputFalse.name = 'question[choices_attributes][' + index + '][truth_value]';
+      newRadioInputFalse.id = "choice_false_" + index;
       newRadioInputFalseText = document.createTextNode(' False');
       newRadioInputFalseLabel.appendChild(newRadioInputFalse);
       newRadioInputFalseLabel.appendChild(newRadioInputFalseText);
@@ -89,8 +92,8 @@ document.addEventListener('turbolinks:load', function() {
     function removeField(e) {
       let fieldToRemove = e.srcElement.closest('.field');
       fieldToRemove.parentNode.removeChild(fieldToRemove);
-
       updateLabels();
+      --total;
     }
 
     function updateLabels() {

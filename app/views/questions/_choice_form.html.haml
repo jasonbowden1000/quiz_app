@@ -5,7 +5,7 @@
     .columns.is-mobile
       .column.is-11-tablet.is-10-mobile
         %input{class: "input", required: true, type: "text", name: "question[choices_attributes][#{index}][text]", |
-          value: choice_text, id: "choice_text_#{index}"  }
+          value: choice_text, id: "choice_text_#{index}", data: { key: index } }
       .column.is-1-tablet.is-2-mobile
         .close X
     %label.radio
