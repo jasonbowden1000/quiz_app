@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'simple_form', '~> 4.1'
-gem 'devise', '~> 4.6', '>= 4.6.2'
+gem 'devise', '~> 4.7'
 gem 'bulma-rails', '~> 0.7.5'
 gem 'bulma-extensions-rails', '~> 1.0', '>= 1.0.30'
 gem 'font_awesome5_rails', '~> 0.7.0'
